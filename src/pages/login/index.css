@@ -1,0 +1,41 @@
+/*.layout {*/
+/*    background-image: url("src/assets/background-image/3background.jpg");*/
+/*    background-repeat: no-repeat;*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*}*/
+
+/*.container {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: 100vh;*/
+/*    background-image: url("src/assets/background-image/555.jpg");*/
+/*    background-size: cover;*/
+/*}*/
+
+.login-card {
+    width: 300px;
+}
+
+/*.login-form {*/
+/*    width: 400px;*/
+/*    position: relative;*/
+/*    left: 50%;*/
+/*    top: 50%;*/
+/*    transform: translate3d(-50%, -50%, 0);*/
+/*}*/
+
+
+.login-form-forgot {
+    float: right;
+}
+
+.login-form-button {
+    margin-top: 1px;
+    width: 100%;
+}
+.title-class {
+    text-align: center;
+}
+  

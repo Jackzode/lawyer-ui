@@ -1,0 +1,20 @@
+.card {
+    width: 99%;
+}
+
+.ant-card .ant-card-body {
+    padding: 10px;
+    border-radius: 0 0 8px 8px;
+}
+.ant-card .ant-card-meta-detail {
+    margin-bottom: 2px;
+}
+.ant-card .ant-card-meta-title {
+    color: rgba(0, 0, 0, 0.88);
+    font-weight: 600;
+    font-size: 18px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+}

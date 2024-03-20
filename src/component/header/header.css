@@ -1,0 +1,61 @@
+.header {
+    background: #fff;
+    padding: 0;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 8%);
+    position: relative;
+    z-index: 44;
+}
+.header.active {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 0 4px 0 rgb(115 115 115 / 20%);
+    z-index: 9999;
+    background: #fff;
+}
+.logo {
+    height: 70px; /*head高度在这里撑开*/
+}
+.headNav {
+    width: 390px;
+}
+.header .link {
+    color: #8491a5;
+    /*margin-left: 15px;*/
+    transition: 0.5s;
+    font-weight: 500;
+    font-size: 25px;
+}
+
+.header a:hover {
+    color: black;
+}
+
+.search {
+    border: 2px solid #ebeced;
+    border-radius: 5px;
+    padding: 0 10px;
+    width: 380px;
+    background-color: #f8f8fa;
+}
+
+.search input {
+    border: none;
+    outline: none;
+    background-color: #f8f8fa;
+    padding: 8px;
+    width: 100%;
+    font-size: 17px;
+    height: 38px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .header .search {
+        display: none;
+    }
+}
+
+
+
