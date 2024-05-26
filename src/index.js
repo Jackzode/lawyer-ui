@@ -1,10 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import MyRouter from "@/router";
+import router from "@/router";
 import "./index.css"
+import "normalize.css"
+import {RouterProvider} from "react-router-dom";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<MyRouter/>);
+root.render(
+    <>
+        <RouterProvider router={router} />
+    </>
+);
 
 

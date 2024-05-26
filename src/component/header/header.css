@@ -4,6 +4,7 @@
     box-shadow: 0 2px 4px rgb(0 0 0 / 8%);
     position: relative;
     z-index: 44;
+    height: 53px;
 }
 .header.active {
     position: sticky;
@@ -15,18 +16,20 @@
     background: #fff;
 }
 .logo {
-    height: 70px; /*head高度在这里撑开*/
+    height: 100%;
 }
 .headNav {
-    width: 390px;
+    width: 35%;
 }
 .header .link {
     color: #8491a5;
     /*margin-left: 15px;*/
     transition: 0.5s;
     font-weight: 500;
-    font-size: 25px;
+    font-size: 12px;
+    flex-direction: column;
 }
+
 
 .header a:hover {
     color: black;
@@ -36,7 +39,7 @@
     border: 2px solid #ebeced;
     border-radius: 5px;
     padding: 0 10px;
-    width: 380px;
+    width: 30%;
     background-color: #f8f8fa;
 }
 
