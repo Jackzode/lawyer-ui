@@ -1,0 +1,29 @@
+.follow-suggestions {
+    padding: 20px;
+    width: 60%;
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    .ant-card-body {
+        h4 {
+            font-size: 10px;
+        }
+        padding-bottom: 0;
+    }
+    .ant-card-meta-title {
+        font-size: 10px;
+    }
+}
+
+
+.profile-title {
+    height: 66px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+

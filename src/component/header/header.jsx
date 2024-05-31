@@ -1,18 +1,20 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import LOGO from "@/assets/logo/blue-logo.png"
 import "./header.css"
-import Message from "src/component/header/message"
 import User from "@/component/user/user"
 import { Link } from "react-router-dom"
-import {Avatar, Button} from "antd"
 import {
     CreditCardOutlined,
-    HomeOutlined, MessageOutlined, PlusOutlined,
+    HomeOutlined, MessageOutlined, NotificationOutlined, PlusOutlined,
     PlusSquareOutlined,
     QuestionCircleOutlined,
     SearchOutlined,
     TeamOutlined
 } from "@ant-design/icons"
+import {getToken} from "@/utils";
+import {Button} from "antd";
+import {useSelector} from "react-redux";
+import {setIsLogin} from "@/store/modules/user";
 
 const nav = [
     {
@@ -35,15 +37,17 @@ const nav = [
         path: "/message",
         icon: <MessageOutlined />
     },
+    {
+        label: "Notification",
+        path: "/notification",
+        icon: <NotificationOutlined />
+    },
 ]
 
+
 const Header = () => {
-    // window.addEventListener("scroll", function () {
-    //     const header = this.document.querySelector(".header")
-    //     header.classList.toggle("active", this.window.scrollY > 100)
-    // })
-    // window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
-    const [navList, setNavList] = useState(false)
+
+    const isLogin = useSelector(state => state.user.isLogin)
 
     return (
         <>
@@ -76,7 +80,7 @@ const Header = () => {
                         </Link>
                     </div>
                     <div>
-                        <User />
+                        {isLogin ? <User /> : <Button shape={"round"} href={'/login'} >Login</Button>}
                     </div>
                 </div>
             </div>

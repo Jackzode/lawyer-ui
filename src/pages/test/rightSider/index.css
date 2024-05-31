@@ -1,0 +1,49 @@
+
+.side-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column; /* 将子元素沿着垂直方向排列 */
+    position: sticky;
+}
+
+.sideCommon {
+    width: 100%;
+    margin-bottom: 5px;
+
+}
+
+.sideCommon p {
+    font-size: 13px;
+
+}
+
+.sideCommon span {
+    margin-right: 3px;
+    margin-bottom: 3px;
+}
+
+
+.account-info {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.account-info Card {
+    width: 100%;
+}
+
+.web-info{
+    position: sticky;
+    top: 15px;
+}
+
+.navLi {
+    padding: 3px;
+}
+
+
+
+.sideCommon span {
+    margin-right: 0px;
+    margin-bottom: 0px;
+}

@@ -1,0 +1,11 @@
+
+
+.follow-button-style {
+    padding: 0;
+    color: #778294;
+    font-weight: bold;
+}
+
+follow-button-style:hover {
+    color: blue;
+}

@@ -1,0 +1,16 @@
+
+.question-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.post-list {
+    padding-left: 10px;
+    padding-right: 10px;
+    /*width: 100%;*/
+}
+
+
+

@@ -1,41 +1,42 @@
-/*.layout {*/
-/*    background-image: url("src/assets/background-image/3background.jpg");*/
-/*    background-repeat: no-repeat;*/
-/*    height: 100%;*/
-/*    width: 100%;*/
-/*}*/
-
-/*.container {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    height: 100vh;*/
-/*    background-image: url("src/assets/background-image/555.jpg");*/
-/*    background-size: cover;*/
-/*}*/
-
-.login-card {
-    width: 300px;
+.login-form {
+    max-width: 300px;
 }
-
-/*.login-form {*/
-/*    width: 400px;*/
-/*    position: relative;*/
-/*    left: 50%;*/
-/*    top: 50%;*/
-/*    transform: translate3d(-50%, -50%, 0);*/
-/*}*/
-
-
 .login-form-forgot {
     float: right;
 }
+.ant-col-rtl .login-form-forgot {
+    float: left;
+}
+ .login-form-button {
+     width: 100%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+.login-form-container{
+    width: 440px;
+    height: 360px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    flex-direction: column;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 50px rgb(0 0 0 / 10%);
+}
 
-.login-form-button {
-    margin-top: 1px;
+
+.login {
     width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: center/cover url('src/assets/background-image/555.jpg');
 }
-.title-class {
-    text-align: center;
+
+.login-logo {
+    width: 200px;
+    height: 60px;
+    display: block;
+    margin: 0 auto 20px;
 }
-  

@@ -1,31 +1,33 @@
 import React from 'react';
 import {Card, Avatar, Button, Row, Col, Typography} from 'antd';
-import { CloseOutlined } from '@ant-design/icons';
-import './index.css'
+import {CloseOutlined} from '@ant-design/icons';
+import './index.scss'
 import lgo from "@/assets/avatar/logo300.png"
-const {Text} = Typography
-const { Meta } = Card;
 
-const UserCard = ({ user }) => {
+const {Text} = Typography
+const {Meta} = Card;
+
+const UserCard = ({user}) => {
     return (
         <Card
+            onClick={(e)=>(console.log(e))}
             hoverable
-            style={{height: '230px', }}
-            className="user-card"
-            cover={<img alt="cover" src={lgo} />}
+            style={{height: '240px',}}
+
+            cover={<img alt="cover" src={lgo}/>}
         >
             <Meta
-                avatar={<Avatar src={user.avatar} />}
-                  title={
+                avatar={<Avatar src={user.avatar}/>}
+                title={
                     <div>
-                        <Text style={{fontWeight:'bold'}}>{user.name}</Text>
+                        <Text style={{fontWeight: 'bold'}}>{user.name}</Text>
                         <h4>{user.followers} followers</h4>
                     </div>
-                  }
-                  description={<div className={'profile-title'}>{user.title}</div>}
+                }
+                description={<div className={'profile-title'}>{user.title}</div>}
             />
-            <div className={'flexCenter'} style={{marginTop: '6px'}}>
-                <Button style={{width: '70%'}} shape={'round'} >Follow</Button>
+            <div className={'flexCenter'} style={{marginTop: '14px'}}>
+                <Button style={{width: '70%'}} shape={'round'}>Follow</Button>
             </div>
         </Card>
     );
@@ -65,6 +67,35 @@ const users = [
         followers: '80,995',
         followedBy: 'Zhiq',
     },
+    {
+        name: 'Michael Yan',
+        title: 'Founder & CEO @ Simplify | Looking for a job?',
+        avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
+        coverImage: 'https://via.placeholder.com/300x100',
+        followers: '80,995',
+        followedBy: 'Zhiq',
+    }, {
+        name: 'Michael Yan',
+        title: 'Founder & CEO @ Simplify | Looking for a job?',
+        avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
+        coverImage: 'https://via.placeholder.com/300x100',
+        followers: '80,995',
+        followedBy: 'Zhiq',
+    }, {
+        name: 'Michael Yan',
+        title: 'Founder & CEO @ Simplify | Looking for a job?',
+        avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
+        coverImage: 'https://via.placeholder.com/300x100',
+        followers: '80,995',
+        followedBy: 'Zhiq',
+    }, {
+        name: 'Michael Yan',
+        title: 'Founder & CEO @ Simplify | Looking for a job?',
+        avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
+        coverImage: 'https://via.placeholder.com/300x100',
+        followers: '80,995',
+        followedBy: 'Zhiq',
+    },
     // Add more user objects here
 ];
 
@@ -88,10 +119,12 @@ const FollowSuggestions = () => {
 };
 
 
-const App = () => (
-    <div className="App">
-        <FollowSuggestions/>
-    </div>
-);
-export default App;
+const Specialist = () =>{
+    return (
+        <div>
+            <FollowSuggestions/>
+        </div>
+    )
+}
+export default Specialist;
 

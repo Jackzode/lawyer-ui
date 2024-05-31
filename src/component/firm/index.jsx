@@ -1,7 +1,7 @@
 import React from 'react';
 import { AreaChartOutlined, EllipsisOutlined, MessageOutlined } from '@ant-design/icons';
 import { Avatar, Card } from 'antd';
-import "./firm.css"
+import "./index.css"
 
 
 const { Meta } = Card;

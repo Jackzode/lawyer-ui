@@ -1,6 +1,6 @@
 
 import Header from "@/component/header/header";
-import Footer from "@/component/footer";
+import Footer from "src/pages/test/footer";
 import {Outlet} from "react-router-dom";
 const Layout = () => {
     return (
@@ -8,7 +8,6 @@ const Layout = () => {
             <div>
                 <Header/>
                 <Outlet/>
-                <Footer/>
             </div>
 
     )

@@ -1,10 +1,11 @@
 import React, {useState} from "react"
 import {SettingOutlined, QuestionCircleOutlined, LogoutOutlined} from "@ant-design/icons"
-import {Link} from "react-router-dom"
-import {Avatar, Button} from "antd"
+import {Link, useNavigate} from "react-router-dom"
+import {Avatar, Button, message} from "antd"
 import "./user.css"
-// import { useDispatch } from "react-redux"
-// import { authActions } from "../../store/authSlice"
+import { useDispatch } from "react-redux"
+import {clearUserInfo, setIsLogin} from "@/store/modules/user";
+
 
 export const User = () => {
     const user = true
@@ -14,10 +15,14 @@ export const User = () => {
         setProfileOpen(null)
     }
 
-    // const dispatch = useDispatch()
-    // const logoutHandler = (e) => {
-    //     dispatch(authActions.logout())
-    // }
+    const dispatch = useDispatch()
+    const navigator = useNavigate()
+    const logoutHandler = (e) => {
+        dispatch(clearUserInfo())
+        dispatch((setIsLogin(false)))
+        navigator("/")
+        message.success("logout...")
+    }
     return (
         <>
             <div className='profile'>
@@ -28,7 +33,7 @@ export const User = () => {
                         </div>
                         {profileOpen && (
                             <div className='openProfile' onMouseLeave={close}>
-                                <Link to='/userInfo'>
+                                <Link to='/profile'>
                                     <Button type='text' className='box'>
                                         <SettingOutlined className='icon'/>
                                         <h4>My Account</h4>
@@ -41,7 +46,7 @@ export const User = () => {
                                     </Button>
                                 </Link>
                                 <Link  to='/'>
-                                    <Button type='text' className='box'>
+                                    <Button type='text' className='box' onClick={()=>(logoutHandler())}>
                                         <LogoutOutlined className='icon'/>
                                         <h4>Log Out</h4>
                                     </Button>

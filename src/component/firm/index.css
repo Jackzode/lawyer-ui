@@ -1,0 +1,24 @@
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.profile-details {
+    flex-grow: 1;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: space-between;
+}
+.profile-card-container {
+    display: flex;
+    gap: 20px;
+}
+
+.profile-card {
+    flex: 1 1 calc(33.333% - 20px);
+    box-sizing: border-box;
+}
