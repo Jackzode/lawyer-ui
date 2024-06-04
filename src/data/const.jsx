@@ -1,7 +1,40 @@
 
 
 
-export const questions = [
+const CITYLIST = [
+    {
+        value: 'zhejiang',
+        label: 'Zhejiang',
+        children: [
+            {
+                value: 'hangzhou',
+                label: 'Hangzhou',
+            },
+        ],
+    },
+    {
+        value: 'beijing',
+        label: 'beijing',
+        children: [
+            {
+                value: 'haidian',
+                label: 'haidian',
+            },
+        ],
+    },
+    {
+        value: 'shanghai',
+        label: 'shanghai',
+        children: [
+            {
+                value: 'huangpu',
+                label: 'huangpu',
+            },
+        ],
+    },
+]
+
+const questions = [
     {
         "id": 1,
         "title": "如何学习编程？",
@@ -41,3 +74,7 @@ export const questions = [
         "content": "学习编程是一个循序渐进的过程。首先，你可以从学习基础的编程概念开始，比如变量、循环、条件语句等。接着，选择一门编程语言作为入门，常见的选择包括Python、JavaScript、Java等。通过阅读相关书籍、教程，完成编程练习，逐步提升编程能力。另外，参与编程社区、论坛，与他人交流学习经验，也是一个很好的学习方式。记得不要急于求成，耐心学习，不断实践，才能成为一个优秀的程序员。加油！"
     },
 ]
+
+
+
+export {CITYLIST}

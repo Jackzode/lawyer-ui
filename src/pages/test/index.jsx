@@ -1,97 +1,66 @@
 import React from 'react';
-import {Card, Avatar, Button, Row, Col, Typography} from 'antd';
-import { CloseOutlined } from '@ant-design/icons';
-import './index.css'
-import lgo from "@/assets/avatar/logo300.png"
-const {Text} = Typography
-const { Meta } = Card;
+import { Form, Input, Button, Radio, DatePicker, Select, Upload, Avatar } from 'antd';
+import { UploadOutlined, UserOutlined } from '@ant-design/icons';
+import './index.css';
 
-const UserCard = ({ user }) => {
+const { Option } = Select;
+
+const ProfileForm = () => {
     return (
-        <Card
-            hoverable
-            style={{height: '230px', }}
-            className="user-card"
-            cover={<img alt="cover" src={lgo} />}
-        >
-            <Meta
-                avatar={<Avatar src={user.avatar} />}
-                  title={
-                    <div>
-                        <Text style={{fontWeight:'bold'}}>{user.name}</Text>
-                        <h4>{user.followers} followers</h4>
-                    </div>
-                  }
-                  description={<div className={'profile-title'}>{user.title}</div>}
-            />
-            <div className={'flexCenter'} style={{marginTop: '6px'}}>
-                <Button style={{width: '70%'}} shape={'round'} >Follow</Button>
-            </div>
-        </Card>
-    );
-};
-
-
-const users = [
-    {
-        name: 'Michael Yan',
-        title: 'Founder & CEO @ Simplify | Looking for a job? @ Simplify | Looking for a job @ Simplify | Looking for a job @ Simplify | Looking for a job',
-        avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
-        coverImage: 'https://via.placeholder.com/300x100',
-        followers: '80,995',
-        followedBy: 'Zhiq',
-    },
-    {
-        name: 'Michael Yan',
-        title: 'Founder',
-        avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
-        coverImage: 'https://via.placeholder.com/300x100',
-        followers: '80,995',
-        followedBy: 'Zhiq',
-    },
-    {
-        name: 'Michael Yan',
-        title: 'Founder & CEO @ Simplify | Looking for a job?',
-        avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
-        coverImage: 'https://www.guibook.com/upload/image/202005/15908056758211805.jpg',
-        followers: '80,995',
-        followedBy: 'Zhiq',
-    },
-    {
-        name: 'Michael Yan',
-        title: 'Founder & CEO @ Simplify | Looking for a job?',
-        avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
-        coverImage: 'https://via.placeholder.com/300x100',
-        followers: '80,995',
-        followedBy: 'Zhiq',
-    },
-    // Add more user objects here
-];
-
-const FollowSuggestions = () => {
-    return (
-        <div className={'flexCenter'}>
-            <div className="follow-suggestions">
-                <Card>
-                    <h2>People who follow Google also follow</h2>
-                    <Row gutter={[16, 16]}>
-                        {users.map(user => (
-                            <Col key={user.name} xs={24} sm={12} md={8} lg={8} xl={8}>
-                                <UserCard user={user}/>
-                            </Col>
-                        ))}
-                    </Row>
-                </Card>
-            </div>
+        <div className="profile-form-container">
+            <Form layout="vertical">
+                <div className="profile-avatar">
+                    <Avatar size={100} icon={<UserOutlined />} />
+                    <Upload>
+                        <Button icon={<UploadOutlined />} className="upload-button">Upload</Button>
+                    </Upload>
+                </div>
+                <Form.Item label="昵称" name="nickname">
+                    <Input placeholder="jackzhi" />
+                </Form.Item>
+                <Form.Item label="性别" name="gender">
+                    <Radio.Group>
+                        <Radio value="male">男性</Radio>
+                        <Radio value="female">女性</Radio>
+                    </Radio.Group>
+                </Form.Item>
+                <Form.Item label="生日" name="birthday">
+                    <DatePicker style={{ width: '100%' }} />
+                </Form.Item>
+                <Form.Item label="现居地" name="location">
+                    <Select placeholder="北京">
+                        <Option value="北京">北京</Option>
+                        <Option value="上海">上海</Option>
+                        <Option value="广州">广州</Option>
+                        <Option value="深圳">深圳</Option>
+                    </Select>
+                </Form.Item>
+                <Form.Item label="个人介绍" name="introduction">
+                    <Input.TextArea placeholder="关于你的个性，兴趣或经验..." maxLength={100} showCount />
+                </Form.Item>
+                <Form.Item label="个人网站" name="website">
+                    <Input placeholder="你个人网站，博客或作品集等" />
+                </Form.Item>
+                <Form.Item label="GitHub" name="github">
+                    <Input placeholder="用户名" />
+                </Form.Item>
+                <Form.Item label="就读学校" name="school">
+                    <Input placeholder="华中科技大学" />
+                </Form.Item>
+                <Form.Item label="所在公司" name="company">
+                    <Input placeholder="最近工作公司" />
+                </Form.Item>
+                <Form.Item label="职位" name="position">
+                    <Input placeholder="你的职位" />
+                </Form.Item>
+                <Form.Item>
+                    <Button type="primary" htmlType="submit">
+                        保存
+                    </Button>
+                </Form.Item>
+            </Form>
         </div>
     );
 };
 
-
-const App = () => (
-    <div className="App">
-        <FollowSuggestions/>
-    </div>
-);
-export default App;
-
+export default ProfileForm;

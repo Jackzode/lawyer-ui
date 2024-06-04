@@ -1,17 +1,16 @@
-import {Avatar, Button, Card, Col, Flex, Row, Typography, Dropdown, List, Divider} from "antd";
+import {Avatar, Button, Card, Col, Flex, Row, Typography, Dropdown, List} from "antd";
 import React, {useEffect, useState} from "react";
 import "./index.css"
-import {SettingOutlined} from "@ant-design/icons";
 import {getNotification} from "@/apis/question";
 
 
-const {Text, Title} = Typography;
+const {Text} = Typography;
 
 const items = [
     {
         key: '1',
         label: (
-            <a target="_blank" rel="noopener noreferrer" href="#">
+            <a target="_blank" rel="noopener noreferrer" href="/">
                 system
             </a>
         ),
@@ -20,7 +19,7 @@ const items = [
         key: '2',
         label:
             (
-                <a target="_blank" rel="noopener noreferrer" href="#">
+                <a target="_blank" rel="noopener noreferrer" href="/">
                     comments
                 </a>
             ),
@@ -29,7 +28,7 @@ const items = [
         key: '3',
         label:
             (
-                <a target="_blank" rel="noopener noreferrer" href="#">
+                <a target="_blank" rel="noopener noreferrer" href="/">
                     @ me
                 </a>
             ),

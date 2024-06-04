@@ -1,56 +1,72 @@
 import React, {useState} from 'react';
-import {Card, Button, Tooltip, Avatar} from 'antd';
+import {Card, Button, Tooltip, Avatar, Input} from 'antd';
 import {
     LikeOutlined,
     CommentOutlined, SendOutlined
 } from '@ant-design/icons';
 import "./post.css"
-const { Meta } = Card;
+
+const {Meta} = Card;
 
 
-const Post = ({question}) => {
+const Post = ({post}) => {
 
-    const [expanded, setExpanded] = useState(false);
 
-    const toggleExpand = () => {
-        setExpanded(!expanded);
+    const [showComments, setShowComments] = useState(false);
+
+    const toggleComments = () => {
+        setShowComments(!showComments);
     };
 
-    return  (
+    const [isExpanded, setIsExpanded] = useState(false);
 
-        <Card
-            style={{marginBottom: 10}}
-            actions={[
-                <Tooltip title="Like">
-                    <LikeOutlined key="like"/>
-                    <span style={{paddingLeft: 8}}>{question.likes}</span>
-                </Tooltip>,
-                <Tooltip title="Comment">
-                    <CommentOutlined key="comment"/>
-                    <span style={{paddingLeft: 8}}>{question.comments}</span>
-                </Tooltip>,
-                <Tooltip title="Send">
-                    <SendOutlined key="send"/>
-                </Tooltip>,
-            ]}
-        >
-            <Meta style={{marginBottom: '10px'}}
-                avatar={<Avatar className={'flexCenter'} src={question.avatar}/>}
-                title={
-                    <div className={'flexBetween'}>
-                        <span>{question.name}</span>
-                        <span>
+    const toggleExpansion = () => {
+        setIsExpanded(!isExpanded);
+    };
+
+    return (
+        <div>
+            <Card
+                hoverable={true}
+                style={{marginBottom: 10}}
+                actions={[
+                    <Button icon={<LikeOutlined/>} type="text">{post.likes}</Button>,
+                    <Button icon={<CommentOutlined/>} type="text" onClick={toggleComments}/>,
+                    <Button icon={<SendOutlined/>} type="text">Send</Button>,
+                ]}
+            >
+                <Meta style={{marginBottom: '10px'}}
+                      avatar={<Avatar className={'flexCenter'} src={post.avatar}/>}
+                      title={
+                          <div className={'flexBetween'}>
+                              <span>{post.name}</span>
+                              <span>
                             <Button type="link" size="small" style={{marginLeft: 8}}>
                                 + Follow
                             </Button>
                         </span>
+                          </div>
+                      }
+                />
+                <div>
+                    <div className={'post-content ' + (isExpanded? '' : 'truncate-text')} dangerouslySetInnerHTML={{__html: post.content}}/>
+                    {!isExpanded&&<Button type={"text"} onClick={toggleExpansion}>see more</Button>}
+                </div>
+            </Card>
+            {showComments && (
+                <Card>
+                    <div className="post-comment-input">
+                        <Input placeholder="Add a comment..."/>
                     </div>
-                }
-
-            />
-            {question.content}
-            {question.image && <img src={question.image} alt="Post" style={{width: '100%', marginTop: 16}}/>}
-        </Card>
+                    <div className="post-comments">
+                        {post.comments.map((comment, index) => (
+                            <div key={index} className="post-comment">
+                                comment...
+                            </div>
+                        ))}
+                    </div>
+                </Card>
+            )}</div>
     )
 
 
@@ -60,17 +76,11 @@ const Post = ({question}) => {
 export default Post;
 
 
-
-
-
-
-
-
 /*<Card className={'card'}>
-                <Meta style={{marginBottom: '2px'}} title={question.title} description={question.description}/>
+                <Meta style={{marginBottom: '2px'}} title={home.title} description={home.description}/>
                 <div>
-                        {expanded ? question.content : question.content.substring(0, 100)}
-                        {question.content.length > 100 && !expanded && <span>...</span>}
+                        {expanded ? home.content : home.content.substring(0, 100)}
+                        {home.content.length > 100 && !expanded && <span>...</span>}
                         <span onClick={toggleExpand} style={{marginLeft: '5px', cursor: 'pointer'}}>
                                 {expanded ? <UpOutlined/> : <DownOutlined/>}
                         </span>
@@ -78,10 +88,10 @@ export default Post;
 
                 <div style={{marginTop: '5px'}}>
                     <div style={{display: 'flex', justifyContent: 'flex-start'}}>
-                        <Button style={{width: 'auto'}} icon={<LikeOutlined />} type="text">{question.views}</Button>
-                        <Button style={{width: 'auto'}} icon={<DislikeOutlined />} type="text">{question.views}</Button>
-                        <Button style={{width: 'auto'}} icon={<EyeOutlined/>} type="text">{question.views}</Button>
-                        <Button style={{width: 'auto'}} icon={<MessageOutlined/> } type="text">{question.answers}</Button>
+                        <Button style={{width: 'auto'}} icon={<LikeOutlined />} type="text">{home.views}</Button>
+                        <Button style={{width: 'auto'}} icon={<DislikeOutlined />} type="text">{home.views}</Button>
+                        <Button style={{width: 'auto'}} icon={<EyeOutlined/>} type="text">{home.views}</Button>
+                        <Button style={{width: 'auto'}} icon={<MessageOutlined/> } type="text">{home.answers}</Button>
                     </div>
 
                 </div>

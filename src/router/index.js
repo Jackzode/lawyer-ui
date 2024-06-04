@@ -1,16 +1,19 @@
 import {createBrowserRouter} from "react-router-dom"
-import Login from "@/pages/login"
+import Login from "src/pages/login"
 import Test from "@/pages/test"
 import React from 'react';
-import Question from "@/pages/question/question"
+import Home from "src/pages/home"
 import Specialist from "@/pages/specialist"
-import Layout from "@/pages/layout";
-import Order from "@/pages/order";
-import UserCenter from "@/pages/UserCenter";
-import Create from  "@/pages/Create"
-import Message from "@/pages/Message";
-import Notification from "@/pages/Notification";
+import Layout from "src/pages/layout";
+import Order from "src/pages/order";
+import UserCenter from "src/pages/user";
+import Create from "src/pages/create"
+import Message from "src/pages/message";
+import Notification from "src/pages/notification";
 import Register from "@/pages/register";
+import Collection from "@/component/collection";
+import PersonalInfo from "@/component/personal";
+import PostHistory from "src/component/historypost";
 
 const router = createBrowserRouter([
     {
@@ -23,19 +26,34 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element:  <Question />
+                element:  <Home />
             },
             {
-                path: 'specialist',
+                path: '/specialist',
                 element: <Specialist />
             },
             {
-                path: 'order',
+                path: '/order',
                 element: <Order />
             },
             {
-                path : "profile",
-                element: <UserCenter />
+                path : "/profile",
+                element: <UserCenter />,
+                children: [
+                    {
+                        path: "/profile/personal",
+                        element: <PersonalInfo/>
+                    },
+                    {
+                        index: true,
+                        path: "/profile",
+                        element: <PostHistory/>
+                    },
+                    {
+                        path: "/profile/collection",
+                        element: <Collection/>
+                    }
+                ]
             },
             {
                 path : "create",

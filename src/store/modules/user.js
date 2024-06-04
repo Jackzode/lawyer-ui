@@ -10,7 +10,15 @@ const userStore = createSlice({
     initialState: {
         isLogin: false,
         token: getToken() || '',
-        userInfo: {}
+        userInfo: {
+            name: "",
+            description: "",
+            avatar: "https://img.ixintu.com/download/jpg/20200917/d38df2c52b6a439dff388445fa5a5050_512_512.jpg!con",
+            follow : 0,
+            likes: 0,
+            ranking: 0,
+            collection: 0,
+        }
     },
     // 同步修改方法
     reducers: {
@@ -54,7 +62,7 @@ const fetchLogin = (loginForm) => {
 const fetchUserInfo = () => {
     return async (dispatch) => {
         const res =  getProfileAPI()
-        dispatch(setUserInfo(res.data))
+        dispatch(setUserInfo(res))
     }
 
 }

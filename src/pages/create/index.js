@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
 import {Editor} from '@tinymce/tinymce-react';
 import {Button, Card, Flex, Form, Input, message, Select, Radio} from "antd";
-import {useRef} from 'react';
 const { Option } = Select;
 
 const MyForm = () => {
 
-    const editorRef = useRef(null);
 
     const [editorContent, setEditorContent] = useState('');
 
@@ -50,7 +48,7 @@ const MyForm = () => {
                             </Select>
                         </Form.Item>
                         <Form.Item label="introduce in one word" name="introduction" style={{marginBottom: '5px'}}>
-                            <Input suffix={<a href="#">edit</a>}/>
+                            <Input suffix={<a href="/">edit</a>}/>
                         </Form.Item>
 
                         <Form.Item label="Allow Reprint" name="reprint" style={{marginBottom: '5px'}}>

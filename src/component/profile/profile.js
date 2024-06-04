@@ -1,6 +1,5 @@
-import {Avatar, Button, Card, Image} from "antd";
+import {Avatar, Button, Card} from "antd";
 import {
-    AntDesignOutlined,
     CustomerServiceOutlined,
     FieldTimeOutlined,
     HeartOutlined, SaveOutlined,
@@ -12,7 +11,7 @@ import "./index.css"
 
 
 
-const { Meta } = Card;
+
 
 const navList = [
     {id: 1, title: '稍后阅读', link: '#', className: 'navLi', icon: <FieldTimeOutlined/>},
@@ -31,7 +30,7 @@ const Profile = ({userInfo}) => {
                 <div className={"flexCenter"} style={{flexDirection: 'column',fontWeight:"bold"}}>
                     <div>
                         <Avatar
-                            src={<img src={userInfo.avatar ? userInfo.avatar: "https://img.ixintu.com/download/jpg/20200917/d38df2c52b6a439dff388445fa5a5050_512_512.jpg!con"} />}
+                            src={<img src={userInfo.avatar}  alt={""}/>}
                             size={70}
                             shape="circle"
                         />

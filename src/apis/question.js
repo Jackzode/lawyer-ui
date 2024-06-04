@@ -4,7 +4,13 @@ export function getNotification() {
     return [
         {
             src: "system",
-            content: "system messageprivate chatsprivate chatsprivate chatsprivate chatsprivate chatsprivate chatsprivate chatsprivate chatsprivate chatsprivate chatsprivate chatsprivate chats",
+            content: "system messageprivate " +
+                "chatsprivate chatsprivate chatsprivate " +
+                "chatsprivate chatsprivate chatsprivate " +
+                "chatsprivate chatsprivate chatsprivate " +
+                "chatsprivate chatsprivate chatsprivate " +
+                "chatsprivate chatsprivate chatsprivate " +
+                "chatsprivate chatsprivate chatsprivate chatsprivate chatsprivate chatsprivate chatsprivate chatsprivate chats",
             time: "9m",
             userInfo: {
                 name: "jack",
@@ -54,10 +60,36 @@ export function getHomePageQuestionAPI() {
         {
             id: 1,
             name: "jack",
-            content: "我想学习编程！",
+            content: " <p>This is the initial content of the editor.卡号的看法哈口电话</p>\n" +
+                "<h3>拉萨的库哈斯</h3>\n" +
+                "<h3>拉萨的库哈斯</h3>\n" +
+                "<h3>拉萨的库哈斯</h3>\n" +
+                "<h3>拉萨的库哈斯</h3>\n" +
+                "<h3>拉萨的库哈斯</h3>\n" +
+                "<h3>拉萨的库哈斯</h3>\n" +
+                "<h3>拉萨的库哈斯</h3>\n" +
+                "<p><span style=\"font-family: impact, sans-serif;\"><em><strong>啊打发</strong></em></span></p>\n" +
+                "<p><img src=\"https://dimg04.c-ctrip.com/images/0M73s12000b7e01kk0103.png_.webp\" alt=\"\" width=\"1000\" height=\"667\"></p>",
             image: "https://www.guibook.com/upload/image/202005/15908056758211805.jpg",
             likes: 100,
-            comments: 10,
+            comments:  [
+                {
+                    author: {
+                        name: 'Yuxin Zhu',
+                        avatar: 'https://example.com/avatar.jpg',
+                    },
+                    time: '1w',
+                    content: 'We\'re hiring https://replo.app/careers',
+                },
+                {
+                    author: {
+                        name: 'Haoran Wang',
+                        avatar: 'https://example.com/avatar2.jpg',
+                    },
+                    time: '1w',
+                    content: 'Hi Yuxin, I\'ve sent connect request and inmail to you. I am very interested in Software Engineer role at Replo.',
+                },
+            ],
             avatar: "https://www.guibook.com/upload/image/202005/15908056758211805.jpg",
         },
         {
@@ -66,7 +98,24 @@ export function getHomePageQuestionAPI() {
             content: "我想学习编程！",
             image: "https://www.guibook.com/upload/image/202005/15908056758211805.jpg",
             likes: 100,
-            comments: 10,
+            comments:  [
+                {
+                    author: {
+                        name: 'Yuxin Zhu',
+                        avatar: 'https://example.com/avatar.jpg',
+                    },
+                    time: '1w',
+                    content: 'We\'re hiring https://replo.app/careers',
+                },
+                {
+                    author: {
+                        name: 'Haoran Wang',
+                        avatar: 'https://example.com/avatar2.jpg',
+                    },
+                    time: '1w',
+                    content: 'Hi Yuxin, I\'ve sent connect request and inmail to you. I am very interested in Software Engineer role at Replo.',
+                },
+            ],
             avatar: "https://www.guibook.com/upload/image/202005/15908056758211805.jpg",
         },
         {
@@ -75,7 +124,24 @@ export function getHomePageQuestionAPI() {
             content: "我想学习编程！",
             image: "https://www.guibook.com/upload/image/202005/15908056758211805.jpg",
             likes: 100,
-            comments: 10,
+            comments:  [
+                {
+                    author: {
+                        name: 'Yuxin Zhu',
+                        avatar: 'https://example.com/avatar.jpg',
+                    },
+                    time: '1w',
+                    content: 'We\'re hiring https://replo.app/careers',
+                },
+                {
+                    author: {
+                        name: 'Haoran Wang',
+                        avatar: 'https://example.com/avatar2.jpg',
+                    },
+                    time: '1w',
+                    content: 'Hi Yuxin, I\'ve sent connect request and inmail to you. I am very interested in Software Engineer role at Replo.',
+                },
+            ],
             avatar: "https://www.guibook.com/upload/image/202005/15908056758211805.jpg",
         }
 

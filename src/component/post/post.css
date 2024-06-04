@@ -10,6 +10,7 @@
     margin-bottom: 2px;
 }
 .ant-card .ant-card-meta-title {
+
     color: rgba(0, 0, 0, 0.88);
     font-weight: 600;
     font-size: 18px;
@@ -19,7 +20,21 @@
     margin-bottom: 2px;
 }
 
+.truncate-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
 .ant-card-meta-avatar {
     margin: 0;
     padding: 0;
+}
+
+.post-content img {
+    max-width: 100%;
+    height: auto;
 }
