@@ -14,7 +14,7 @@ body {
 }
 
 .container {
-    max-width: 95%;
+    max-width: 80%;
     margin: auto;
 }
 
@@ -58,9 +58,6 @@ ul {
     padding: 0; /* 移除列表的内边距 */
 }
 
-li {
-    text-align: center; /* 将列表项内容居中 */
-}
 
 a {
     text-decoration: none;

@@ -15,7 +15,7 @@ export function getNotification() {
             userInfo: {
                 name: "jack",
                 description: "google",
-                avatar: 'https://www.guibook.com/upload/image/202005/15908056758211805.jpg',
+                avatar: 'https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg',
             }
         },
         {
@@ -25,7 +25,7 @@ export function getNotification() {
             userInfo: {
                 name: "jack",
                 description: "google",
-                avatar: 'https://www.guibook.com/upload/image/202005/15908056758211805.jpg',
+                avatar: 'https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg',
             }
         },
         {
@@ -35,7 +35,7 @@ export function getNotification() {
             userInfo: {
                 name: "jack",
                 description: "google",
-                avatar: 'https://www.guibook.com/upload/image/202005/15908056758211805.jpg',
+                avatar: 'https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg',
             }
         },
         {
@@ -44,7 +44,7 @@ export function getNotification() {
             time: "9m",
             userInfo: {
                 name: "jack",
-                avatar: 'https://www.guibook.com/upload/image/202005/15908056758211805.jpg',
+                avatar: 'https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg',
                 description: "google",
             }
         },
@@ -70,7 +70,7 @@ export function getHomePageQuestionAPI() {
                 "<h3>拉萨的库哈斯</h3>\n" +
                 "<p><span style=\"font-family: impact, sans-serif;\"><em><strong>啊打发</strong></em></span></p>\n" +
                 "<p><img src=\"https://dimg04.c-ctrip.com/images/0M73s12000b7e01kk0103.png_.webp\" alt=\"\" width=\"1000\" height=\"667\"></p>",
-            image: "https://www.guibook.com/upload/image/202005/15908056758211805.jpg",
+            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
             likes: 100,
             comments:  [
                 {
@@ -90,13 +90,13 @@ export function getHomePageQuestionAPI() {
                     content: 'Hi Yuxin, I\'ve sent connect request and inmail to you. I am very interested in Software Engineer role at Replo.',
                 },
             ],
-            avatar: "https://www.guibook.com/upload/image/202005/15908056758211805.jpg",
+            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
         },
         {
             id: 2,
             name: "jack",
             content: "我想学习编程！",
-            image: "https://www.guibook.com/upload/image/202005/15908056758211805.jpg",
+            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
             likes: 100,
             comments:  [
                 {
@@ -116,13 +116,13 @@ export function getHomePageQuestionAPI() {
                     content: 'Hi Yuxin, I\'ve sent connect request and inmail to you. I am very interested in Software Engineer role at Replo.',
                 },
             ],
-            avatar: "https://www.guibook.com/upload/image/202005/15908056758211805.jpg",
+            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
         },
         {
             id: 3,
             name: "jack",
             content: "我想学习编程！",
-            image: "https://www.guibook.com/upload/image/202005/15908056758211805.jpg",
+            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
             likes: 100,
             comments:  [
                 {
@@ -142,7 +142,7 @@ export function getHomePageQuestionAPI() {
                     content: 'Hi Yuxin, I\'ve sent connect request and inmail to you. I am very interested in Software Engineer role at Replo.',
                 },
             ],
-            avatar: "https://www.guibook.com/upload/image/202005/15908056758211805.jpg",
+            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
         }
 
     ]
@@ -160,31 +160,59 @@ export function getRecDataAPI() {
             id: 1,
             name: 'jack',
             des: 'software engineer',
-            avatar: 'https://www.guibook.com/upload/image/202005/15908056758211805.jpg'
+            avatar: 'https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg'
         },
         {
             id: 2,
             name: 'jack',
             des: 'engineer',
-            avatar: 'https://www.guibook.com/upload/image/202005/15908056758211805.jpg'
+            avatar: 'https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg'
         },
         {
             id: 3,
             name: 'jack',
             des: 'software ',
-            avatar: 'https://www.guibook.com/upload/image/202005/15908056758211805.jpg'
+            avatar: 'https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg'
         },
         {
             id: 4,
             name: 'jack',
             des: 'software ',
-            avatar: 'https://www.guibook.com/upload/image/202005/15908056758211805.jpg'
+            avatar: 'https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg'
         },
         {
             id: 5,
             name: 'jack',
             des: 'software ',
-            avatar: 'https://www.guibook.com/upload/image/202005/15908056758211805.jpg'
+            avatar: 'https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg'
         },
     ]
 }
+
+
+/*
+* const onLoadMore = () => {
+        setLoading(true);
+        setList(
+            data.concat(
+                [...new Array(count)].map(() => ({
+                    loading: true,
+                    name: {},
+                    picture: {},
+                })),
+            ),
+        );
+        fetch(fakeDataUrl)
+            .then((res) => res.json())
+            .then((res) => {
+                const newData = data.concat(res.results);
+                setData(newData);
+                setList(newData);
+                setLoading(false);
+                // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
+                // In real scene, you can using public method of react-virtualized:
+                // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
+                window.dispatchEvent(new Event('resize'));
+            });
+    };
+* */

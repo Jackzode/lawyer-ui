@@ -1,259 +1,109 @@
-import React, {useState} from 'react';
-import {
-    AutoComplete, Button, Card, Cascader, Checkbox, Col, Flex, Form, Input, InputNumber, Row, Select,
-} from 'antd';
+import React from 'react';
+import {Button, Card, Flex, Form, Input, message} from 'antd';
+import {register} from '@/apis/user'
+import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {setToken, setUserInfo} from "@/store/modules/user";
 
-const {Option} = Select;
-const residences = [{
-    value: 'zhejiang', label: 'Zhejiang', children: [{
-        value: 'hangzhou', label: 'Hangzhou', children: [{
-            value: 'xihu', label: 'West Lake',
-        },],
-    },],
-}, {
-    value: 'jiangsu', label: 'Jiangsu', children: [{
-        value: 'nanjing', label: 'Nanjing', children: [{
-            value: 'zhonghuamen', label: 'Zhong Hua Men',
-        },],
-    },],
-},];
-const formItemLayout = {
-    labelCol: {
-        xs: {
-            span: 24,
-        }, sm: {
-            span: 8,
-        },
-    }, wrapperCol: {
-        xs: {
-            span: 24,
-        }, sm: {
-            span: 16,
-        },
-    },
-};
-const tailFormItemLayout = {
-    wrapperCol: {
-        xs: {
-            span: 24, offset: 0,
-        }, sm: {
-            span: 16, offset: 8,
-        },
-    },
-};
+
+
 const RegisterForm = () => {
-    const [form] = Form.useForm();
-    const onFinish = (values) => {
-        console.log('Received values of form: ', values);
+    const navigate = useNavigate();
+    const dispatch = useDispatch()
+    const onFinish = (value) => {
+        console.log('Form values:', value)
+        register(value)
+            .then((response) => {
+                console.log("response: ", response)
+                message.success('successfully registered');
+                dispatch(setToken(response.data.access_token))
+                dispatch(setUserInfo(response.data))
+                navigate('/'); // 注册成功后跳转到主页
+            })
+            .catch((error) => {
+                message.error('registration failed');
+            });
     };
-    const prefixSelector = (<Form.Item name="prefix" noStyle>
-            <Select
-                style={{
-                    width: 70,
-                }}
-            >
-                <Option value="86">+86</Option>
-                <Option value="87">+87</Option>
-            </Select>
-        </Form.Item>);
-    const suffixSelector = (<Form.Item name="suffix" noStyle>
-            <Select
-                style={{
-                    width: 70,
-                }}
-            >
-                <Option value="USD">$</Option>
-                <Option value="CNY">¥</Option>
-            </Select>
-        </Form.Item>);
-    const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-    const onWebsiteChange = (value) => {
-        if (!value) {
-            setAutoCompleteResult([]);
-        } else {
-            setAutoCompleteResult(['.com', '.org', '.net'].map((domain) => `${value}${domain}`));
-        }
-    };
-    const websiteOptions = autoCompleteResult.map((website) => ({
-        label: website, value: website,
-    }));
-    return (<Form
-            {...formItemLayout}
-            form={form}
-            name="register"
+
+
+
+
+    return (
+        <Form
             onFinish={onFinish}
-            initialValues={{
-                residence: ['zhejiang', 'hangzhou', 'xihu'], prefix: '86',
+            name="wrap"
+            labelCol={{
+                flex: '110px',
             }}
+            labelAlign="left"
+            labelWrap
+            wrapperCol={{
+                flex: 1,
+            }}
+            colon={false}
             style={{
                 maxWidth: 600,
             }}
-            scrollToFirstError
         >
             <Form.Item
-                name="email"
-                label="E-mail"
-                rules={[{
-                    type: 'email', message: 'The input is not valid E-mail!',
-                }, {
-                    required: true, message: 'Please input your E-mail!',
-                },]}
-            >
-                <Input/>
-            </Form.Item>
-
-            <Form.Item
-                name="password"
-                label="Password"
-                rules={[{
-                    required: true, message: 'Please input your password!',
-                },]}
-                hasFeedback
-            >
-                <Input.Password/>
-            </Form.Item>
-
-            <Form.Item
-                name="confirm"
-                label="Confirm Password"
-                dependencies={['password']}
-                hasFeedback
-                rules={[{
-                    required: true, message: 'Please confirm your password!',
-                }, ({getFieldValue}) => ({
-                    validator(_, value) {
-                        if (!value || getFieldValue('password') === value) {
-                            return Promise.resolve();
-                        }
-                        return Promise.reject(new Error('The new password that you entered do not match!'));
+                label="Username"
+                name="username"
+                rules={[
+                    {
+                        required: true,
                     },
-                }),]}
+                ]}
             >
-                <Input.Password/>
+                <Input />
             </Form.Item>
 
             <Form.Item
-                name="nickname"
-                label="Nickname"
-                tooltip="What do you want others to call you?"
-                rules={[{
-                    required: false, message: 'Please input your nickname!', whitespace: true,
-                },]}
+                label="Password"
+                name="password"
+                rules={[
+                    {
+                        required: true,
+                    },
+                ]}
             >
-                <Input/>
+                <Input />
             </Form.Item>
-
             <Form.Item
-                name="residence"
-                label="Habitual Residence"
-                rules={[{
-                    type: 'array', required: false, message: 'Please select your habitual residence!',
-                },]}
+                label="Email"
+                name="email"
+                rules={[
+                    {
+                        required: true,
+                    },
+                ]}
             >
-                <Cascader options={residences}/>
+                <Input />
             </Form.Item>
 
-            <Form.Item
-                name="phone"
-                label="Phone Number"
-                rules={[{
-                    required: false, message: 'Please input your phone number!',
-                },]}
-            >
-                <Input
-                    addonBefore={prefixSelector}
-                    style={{
-                        width: '100%',
-                    }}
-                />
-            </Form.Item>
-
-            <Form.Item
-                name="website"
-                label="Website"
-                rules={[{
-                    required: false, message: 'Please input website!',
-                },]}
-            >
-                <AutoComplete options={websiteOptions} onChange={onWebsiteChange} placeholder="website">
-                    <Input/>
-                </AutoComplete>
-            </Form.Item>
-
-            <Form.Item
-                name="intro"
-                label="Intro"
-                rules={[{
-                    required: false, message: 'Please input Intro',
-                },]}
-            >
-                <Input.TextArea showCount maxLength={100}/>
-            </Form.Item>
-
-            <Form.Item
-                name="gender"
-                label="Gender"
-                rules={[{
-                    required: true, message: 'Please select gender!',
-                },]}
-            >
-                <Select placeholder="select your gender">
-                    <Option value="male">Male</Option>
-                    <Option value="female">Female</Option>
-                    <Option value="other">Other</Option>
-                </Select>
-            </Form.Item>
-
-            <Form.Item label="Captcha" extra="We must make sure that your are a human.">
-                <Row gutter={8}>
-                    <Col span={12}>
-                        <Form.Item
-                            name="captcha"
-                            noStyle
-                            rules={[{
-                                required: true, message: 'Please input the captcha you got!',
-                            },]}
-                        >
-                            <Input/>
-                        </Form.Item>
-                    </Col>
-                    <Col span={12}>
-                        <Button>Get captcha</Button>
-                    </Col>
-                </Row>
-            </Form.Item>
-
-            <Form.Item
-                name="agreement"
-                valuePropName="checked"
-                rules={[{
-                    validator: (_, value) => value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
-                },]}
-                {...tailFormItemLayout}
-            >
-                <Checkbox>
-                    I have read the <a href="">agreement</a>
-                </Checkbox>
-            </Form.Item>
-            <Form.Item {...tailFormItemLayout}>
+            <Form.Item label=" " className={'flexCenter'}>
                 <Button type="primary" htmlType="submit">
-                    Register
+                    Sign up
                 </Button>
             </Form.Item>
-        </Form>);
-};
-const Register = () => {
-    return (<Flex justify={"center"}>
-            <div>
-
-                <Card style={{width: '800px'}}>
-                    <h2 style={{textAlign: "center"}}>
-                        Register
-                    </h2>
-                    <RegisterForm/>
-                </Card>
-            </div>
-        </Flex>)
+        </Form>
+    )
 }
 
-export default Register;
+
+const RegisterApp = () => {
+  return (
+      <div className={'flexCenter'} style={{marginTop: "24px"}}>
+          <Flex vertical={true} align={'center'}>
+              <h2>Register</h2>
+              <div style={{marginTop: '24px'}}>
+                  <Card hoverable style={{width: '500px'}}>
+                      <br/>
+                      <RegisterForm  />
+                  </Card>
+              </div>
+          </Flex>
+      </div>
+  )
+}
+
+export default RegisterApp

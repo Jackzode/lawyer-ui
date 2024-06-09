@@ -1,0 +1,45 @@
+/* User */
+
+
+.ant-dropdown-menu-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+}
+
+.ant-dropdown-menu-item .anticon {
+    margin-right: 8px;
+}
+
+.openProfile {
+    /*box-shadow: 0 2px 4px rgb(0 0 0 / 8%);*/
+    /*position: absolute;*/
+    /*top: 60px;*/
+    /*right: 30px;*/
+    /*width: 170px;*/
+    /*background: #fff;*/
+    /*border: 1px solid #e6e6e6;*/
+    /*border-radius: 12px;*/
+    /*padding: 7px;*/
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    padding: 5px;
+    background: #fff;
+    transition: 0.5s;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+
+
+.openProfile .icon {
+    font-size: 20px;
+    margin-right: 20px;
+    color: #778294;
+}
+

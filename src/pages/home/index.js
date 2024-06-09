@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from "react";
-import Post from "@/component/post/post"
+import Post from "@/component/post"
 import {Col, Row} from "antd";
 import "./index.css"
 import Profile from "@/component/profile/profile";
 import SiteInfo from "@/component/siteInfo/siteInfo";
-import RecList from "@/component/recFocus";
+import RecList from "src/component/recommend";
 import {useDispatch, useSelector} from 'react-redux'
 import {getHomePageQuestionAPI, getRecDataAPI} from "@/apis/question";
-import {fetchUserInfo} from "@/store/modules/user";
 
 
 const Home = () => {
@@ -18,7 +17,7 @@ const Home = () => {
 
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(fetchUserInfo());
+        // dispatch(fetchUserInfo());
         setQuestion(getHomePageQuestionAPI());
         setRecData(getRecDataAPI());
     }, []);

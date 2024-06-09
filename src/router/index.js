@@ -37,20 +37,20 @@ const router = createBrowserRouter([
                 element: <Order />
             },
             {
-                path : "/profile",
+                path : "/user",
                 element: <UserCenter />,
                 children: [
                     {
-                        path: "/profile/personal",
+                        path: "/user/profile/id",
                         element: <PersonalInfo/>
                     },
                     {
                         index: true,
-                        path: "/profile",
+                        path: "/user/profile",
                         element: <PostHistory/>
                     },
                     {
-                        path: "/profile/collection",
+                        path: "/user/profile/collection",
                         element: <Collection/>
                     }
                 ]

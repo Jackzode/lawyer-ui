@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Avatar, Button, Card, List, message} from 'antd';
 import VirtualList from 'rc-virtual-list';
-import Post from "@/component/post/post";
+import Post from "@/component/post";
 import {getHomePageQuestionAPI} from "@/apis/question";
 import Meta from "antd/es/card/Meta";
 

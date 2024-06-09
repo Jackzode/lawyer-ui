@@ -1,23 +1,12 @@
 import React from 'react';
-import { Row, Col, Typography, Divider } from 'antd';
+import {Row, Col, Typography, Divider, Flex} from 'antd';
 import './index.css'
 import {FacebookOutlined, GoogleOutlined, LinkedinOutlined, TwitterOutlined} from "@ant-design/icons";
 
 
 const { Link, Text } = Typography;
 
-const helpCenter = ['隐私保护指引', '申请开通机构号', '联系我们']
-const reportCenter = ['涉未成年举报', '网络谣言举报', '涉企侵权举报', '更多']
-const aboutLawyer = ['下载', '招聘', '指南', '协议', '更多']
-/*
-* About
-Accessibility
-Help Center
-Privacy & Terms
-Ad Choices
 
-
-* */
 const SiteInfo = () => {
     return (
         <div style={{
@@ -50,21 +39,19 @@ const SiteInfo = () => {
                 </Col>
             </Row>
             <Divider/>
-            <Row justify="center">
-                <Col>
-                    <Text type="secondary">
-                        <span style={{fontWeight: 'bold'}}>Linkedin</span>
-                        LinkedIn Corporation © 2024
-                    </Text>
-                </Col>
-            </Row>
+            <Flex justify="center">
+                <Text type="secondary">
+                    <span style={{fontWeight: 'bold'}}>Lawyer &nbsp;</span>
+                     Corporation © 2024
+                </Text>
+            </Flex>
             <Divider/>
-            <div className='social'>
+            <Flex justify={'space-evenly'}>
                 <GoogleOutlined className='icon'/>
                 <FacebookOutlined className='icon'/>
                 <TwitterOutlined className='icon'/>
                 <LinkedinOutlined className='icon'/>
-            </div>
+            </Flex>
         </div>
 
     )

@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import {Avatar, Button, Card, Col, Flex, Input, List, Row, Tooltip, Typography} from 'antd';
+import {Avatar, Button, Col, Flex, Input, List, Row, Tooltip, Typography} from 'antd';
 import { SmileOutlined, SendOutlined, PictureOutlined } from '@ant-design/icons';
 import Picker from '@emoji-mart/react';
+
+
+
 
 const { TextArea} = Input;
 const { Paragraph } = Typography;
@@ -41,7 +44,7 @@ const initialComments = [
 
 
 
-const CommentsComponent = () => {
+const Comments = () => {
     const [comments, setComments] = useState(initialComments);
     const [inputValue, setInputValue] = useState('');
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
@@ -103,8 +106,8 @@ const CommentsComponent = () => {
     };
 
     return (
-        <div style={{width: '400px'}}>
-            <Flex style={{  marginBottom: 10 }}>
+        <div style={{marginTop: 10 }}>
+            <Flex style={{marginBottom: 10 }}>
                 <Avatar src="https://via.placeholder.com/40" alt="User" />
                 <div style={{ marginLeft: 10, flex: 1 }}>
                     <TextArea
@@ -151,4 +154,4 @@ const CommentsComponent = () => {
     );
 };
 
-export default CommentsComponent;
+export default Comments;

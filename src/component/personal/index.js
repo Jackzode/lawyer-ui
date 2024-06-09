@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Form, Input, Button, Radio, DatePicker, Upload, Cascader, message} from 'antd';
 import {LoadingOutlined, PlusOutlined} from '@ant-design/icons';
 import './index.css';
 import {CITYLIST} from "@/data/const";
+import {useParams} from "react-router-dom";
+import {getProfileByNameAPI, updateProfile} from "@/apis/user";
 
 
 const getBase64 = (img, callback) => {
@@ -89,38 +91,53 @@ const UpLoadAvatar = () => {
 
 
 
-const ProfileForm = ({profile}) => {
+const ProfileForm = () => {
 
+    const params = useParams();
+    const [profile, setProfile] = useState({});
+    useEffect(()=>{
+        getProfileByNameAPI(params).then(
+            response => {
+                setProfile(response.data);
+            }
+        ).catch(error => {
+            console.log(error);
+        })
+    }, [])
 
+    const saveProfile = (value) => {
+        console.log(value);
+        updateProfile(value).then(
+            message.success('update profile successfully'),
+        ).catch(
+            message.error('update profile failed')
+        )
+    }
 
     return (
         <div className="profile-form-container">
-            <Form layout="vertical">
+            <Form layout="vertical"
+                onFinish={saveProfile}
+            >
                 <div className="profile-avatar">
                     <UpLoadAvatar/>
                 </div>
                 <Form.Item label="Nickname" name="nickname">
-                    <Input placeholder="..." />
+                    <Input placeholder={profile.username} />
                 </Form.Item>
-                <Form.Item label="Gender" name="gender">
-                    <Radio.Group>
-                        <Radio value="male">男性</Radio>
-                        <Radio value="female">女性</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                <Form.Item label="Birthday" name="birthday">
-                    <DatePicker style={{ width: '100%' }} />
-                </Form.Item>
-                <Form.Item label="Location">
+                {/*<Form.Item label="Birthday" name="birthday">*/}
+                {/*    <DatePicker style={{ width: '100%' }} defaultValue={} />*/}
+                {/*</Form.Item>*/}
+                <Form.Item label="Location" defaultValue={profile.location} >
                     <Cascader
                         options={CITYLIST}
                     />
                 </Form.Item>
                 <Form.Item label="Introduction" name="introduction">
-                    <Input.TextArea  maxLength={100} showCount />
+                    <Input.TextArea  maxLength={100} showCount placeholder={profile.description} />
                 </Form.Item>
                 <Form.Item label="Website" name="website">
-                    <Input />
+                    <Input placeholder={profile.description} />
                 </Form.Item>
                 <Form.Item label="GitHub" name="github">
                     <Input  />

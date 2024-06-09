@@ -5,7 +5,7 @@ import LOGO from "@/assets/logo/blue-logo.png"
 import "./index.css"
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {fetchLogin, setIsLogin} from "@/store/modules/user";
+import {fetchLogin, setToken, setUserInfo} from "@/store/modules/user";
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -13,8 +13,12 @@ const Login = () => {
     const onFinish = async (values) => {
         console.log(values)
         // 触发异步action fetchLogin
-        await dispatch(fetchLogin(values))
-        dispatch(setIsLogin(true))
+        dispatch(fetchLogin(values)).then((res) => {
+                console.log("---", res.data)
+            }
+        ).catch(
+            message.error('registration failed')
+        )
         // 1. 跳转到首页
         navigate('/')
         // 2. 提示一下用户
@@ -34,18 +38,18 @@ const Login = () => {
                     validateTrigger="onBlur"
                 >
                     <Form.Item
-                        name="username"
+                        name="email"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your Username!',
+                                message: 'Please input your email!',
                             },
                         ]}
                     >
                         <Input prefix={<UserOutlined className="site-form-item-icon"/>} placeholder="Username"/>
                     </Form.Item>
                     <Form.Item
-                        name="password"
+                        name="pass"
                         rules={[
                             {
                                 required: true,

@@ -55,7 +55,7 @@ const users = [
         name: 'Michael Yan',
         title: 'Founder & CEO @ Simplify | Looking for a job?',
         avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
-        coverImage: 'https://www.guibook.com/upload/image/202005/15908056758211805.jpg',
+        coverImage: 'https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg',
         followers: '80,995',
         followedBy: 'Zhiq',
     },
