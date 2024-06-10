@@ -35,7 +35,7 @@ const Profile = ({userInfo}) => {
                     <div><UserOutlined/> Follow &nbsp; 1000</div>
                     <div><StarOutlined/> Likes &nbsp; 1000</div>
                     <div style={{marginTop: 16}}>
-                        <Button type="primary" block href={"/profile"}>My Profile</Button>
+                        <Button type="primary" block href={"/user"}>My Profile</Button>
                     </div>
                 </Flex>
             </Card>

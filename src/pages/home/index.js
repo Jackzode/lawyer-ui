@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import Post from "@/component/post"
 import {Col, Row} from "antd";
 import "./index.css"
-import Profile from "@/component/profile/profile";
+import Profile from "@/component/profile";
 import SiteInfo from "@/component/siteInfo/siteInfo";
 import RecList from "src/component/recommend";
 import {useDispatch, useSelector} from 'react-redux'
@@ -37,7 +37,7 @@ const Home = () => {
                     <Col lg={12} xs={24}>
                         <div>
                             {questions.map(q => (
-                                <Post key={q.id} post={q}/>
+                                <Post key={q.id} closeButton={true} post={q}/>
                             ))}
                         </div>
                     </Col>

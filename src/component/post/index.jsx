@@ -14,12 +14,11 @@ const {Meta} = Card;
 const {Paragraph} = Typography;
 
 
-const Post = ({post}) => {
+const Post = ({ hasSave, closeButton, post}) => {
 
     const [visible, setVisible] = useState(true);
     const [showComments, setShowComments] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
-
     const handleClose = () => {
         setVisible(false);
     };
@@ -30,14 +29,13 @@ const Post = ({post}) => {
     };
 
 
-
     const toggleExpansion = () => {
         setIsExpanded(!isExpanded);
     };
     if (!visible) return null;
 
     return (
-        <div>
+        <div style={{width: "100%"}}>
             <Card
                 hoverable={true}
                 style={{marginBottom: 10}}
@@ -54,9 +52,9 @@ const Post = ({post}) => {
                                       </Button>
                                   </span>
                               </div>
-                              <div>
+                              {closeButton && <div>
                                   <Button onClick={handleClose} icon={<CloseCircleOutlined/>} type={'text'} size="small"/>
-                              </div>
+                              </div>}
                           </Flex>
                       }
                 />
@@ -76,9 +74,7 @@ const Post = ({post}) => {
                     </Col>
                     <Col span={6}>
                         <Button size={'large'} style={{width: '100%'}} type="text"
-                                icon={<SaveOutlined/>}>
-                            Save
-                        </Button>
+                                icon={<SaveOutlined/>}>Save</Button>
                     </Col>
                     <Col span={6}>
                         <Button size={'large'} style={{width: '100%'}} type="text"

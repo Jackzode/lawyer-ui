@@ -72,24 +72,6 @@ export function getHomePageQuestionAPI() {
                 "<p><img src=\"https://dimg04.c-ctrip.com/images/0M73s12000b7e01kk0103.png_.webp\" alt=\"\" width=\"1000\" height=\"667\"></p>",
             image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
             likes: 100,
-            comments:  [
-                {
-                    author: {
-                        name: 'Yuxin Zhu',
-                        avatar: 'https://example.com/avatar.jpg',
-                    },
-                    time: '1w',
-                    content: 'We\'re hiring https://replo.app/careers',
-                },
-                {
-                    author: {
-                        name: 'Haoran Wang',
-                        avatar: 'https://example.com/avatar2.jpg',
-                    },
-                    time: '1w',
-                    content: 'Hi Yuxin, I\'ve sent connect request and inmail to you. I am very interested in Software Engineer role at Replo.',
-                },
-            ],
             avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
         },
         {
@@ -98,24 +80,6 @@ export function getHomePageQuestionAPI() {
             content: "我想学习编程！",
             image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
             likes: 100,
-            comments:  [
-                {
-                    author: {
-                        name: 'Yuxin Zhu',
-                        avatar: 'https://example.com/avatar.jpg',
-                    },
-                    time: '1w',
-                    content: 'We\'re hiring https://replo.app/careers',
-                },
-                {
-                    author: {
-                        name: 'Haoran Wang',
-                        avatar: 'https://example.com/avatar2.jpg',
-                    },
-                    time: '1w',
-                    content: 'Hi Yuxin, I\'ve sent connect request and inmail to you. I am very interested in Software Engineer role at Replo.',
-                },
-            ],
             avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
         },
         {
@@ -124,24 +88,6 @@ export function getHomePageQuestionAPI() {
             content: "我想学习编程！",
             image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
             likes: 100,
-            comments:  [
-                {
-                    author: {
-                        name: 'Yuxin Zhu',
-                        avatar: 'https://example.com/avatar.jpg',
-                    },
-                    time: '1w',
-                    content: 'We\'re hiring https://replo.app/careers',
-                },
-                {
-                    author: {
-                        name: 'Haoran Wang',
-                        avatar: 'https://example.com/avatar2.jpg',
-                    },
-                    time: '1w',
-                    content: 'Hi Yuxin, I\'ve sent connect request and inmail to you. I am very interested in Software Engineer role at Replo.',
-                },
-            ],
             avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
         }
 

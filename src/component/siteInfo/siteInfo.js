@@ -1,6 +1,5 @@
 import React from 'react';
 import {Row, Col, Typography, Divider, Flex} from 'antd';
-import './index.css'
 import {FacebookOutlined, GoogleOutlined, LinkedinOutlined, TwitterOutlined} from "@ant-design/icons";
 
 

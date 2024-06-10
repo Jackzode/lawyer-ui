@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react"
 import LOGO from "@/assets/logo/blue-logo.png"
 import "./header.css"
-import User from "@/component/user"
-import {Link, useNavigate} from "react-router-dom"
-import {PlusOutlined} from "@ant-design/icons"
+import AvatarApp from "@/component/avatar"
+import { useNavigate} from "react-router-dom"
 import {getToken} from "@/utils";
 import {Button, Flex, Image, Input} from "antd";
 import HeadMenu from "@/component/headmenu";
@@ -44,7 +43,7 @@ const Header = () => {
                         />
                     </div>
                     <Button type={'primary'} href={'/create'} shape={'round'}>Create</Button>
-                    {isLogin ? <User /> : <Button shape={'round'} href={'/login'} >Login </Button>}
+                    {isLogin ? <AvatarApp /> : <Button shape={'round'} href={'/login'} >Login </Button>}
                 </Flex>
             </div>
         </>

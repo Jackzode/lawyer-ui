@@ -91,19 +91,19 @@ const UpLoadAvatar = () => {
 
 
 
-const ProfileForm = () => {
+const UserInfo = () => {
 
     const params = useParams();
     const [profile, setProfile] = useState({});
-    useEffect(()=>{
-        getProfileByNameAPI(params).then(
-            response => {
-                setProfile(response.data);
-            }
-        ).catch(error => {
-            console.log(error);
-        })
-    }, [])
+    // useEffect(()=>{
+    //     getProfileByNameAPI(params).then(
+    //         response => {
+    //             setProfile(response.data);
+    //         }
+    //     ).catch(error => {
+    //         console.log(error);
+    //     })
+    // }, [])
 
     const saveProfile = (value) => {
         console.log(value);
@@ -161,4 +161,4 @@ const ProfileForm = () => {
     );
 };
 
-export default ProfileForm;
+export default UserInfo;

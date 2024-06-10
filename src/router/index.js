@@ -6,14 +6,14 @@ import Home from "src/pages/home"
 import Specialist from "@/pages/specialist"
 import Layout from "src/pages/layout";
 import Order from "src/pages/order";
-import UserCenter from "src/pages/user";
 import Create from "src/pages/create"
 import Message from "src/pages/message";
 import Notification from "src/pages/notification";
 import Register from "@/pages/register";
-import Collection from "@/component/collection";
-import PersonalInfo from "@/component/personal";
-import PostHistory from "src/component/historypost";
+import Saved from "@/component/saved";
+import UserInfo from "@/component/userInfo";
+import PostList from "src/component/postlist";
+import Personal from "src/pages/personal";
 
 const router = createBrowserRouter([
     {
@@ -38,20 +38,19 @@ const router = createBrowserRouter([
             },
             {
                 path : "/user",
-                element: <UserCenter />,
+                element: <Personal />,
                 children: [
                     {
-                        path: "/user/profile/id",
-                        element: <PersonalInfo/>
+                        path: "/user/info",
+                        element: <UserInfo/>
                     },
                     {
                         index: true,
-                        path: "/user/profile",
-                        element: <PostHistory/>
+                        element: <PostList/>
                     },
                     {
-                        path: "/user/profile/collection",
-                        element: <Collection/>
+                        path: "/user/saved",
+                        element: <Saved/>
                     }
                 ]
             },
