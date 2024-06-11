@@ -1,17 +1,12 @@
 .profile-form-container {
     max-width: 600px;
-    margin: 0 auto;
+    margin-bottom: 50px;
     padding: 20px;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.profile-avatar {
-    text-align: center;
-    margin-bottom: 20px;
-}
 
-.upload-button {
-    margin-top: 10px;
-}
+
+

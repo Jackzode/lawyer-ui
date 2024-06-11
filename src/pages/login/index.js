@@ -1,86 +1,47 @@
-import React from 'react';
-import {LockOutlined, UserOutlined} from '@ant-design/icons';
-import {Button, Card, Checkbox, Form, Input, message} from 'antd';
-import LOGO from "@/assets/logo/blue-logo.png"
+import React, {useState} from 'react';
+import {Typography, Tabs, Card} from 'antd';
 import "./index.css"
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {fetchLogin, setToken, setUserInfo} from "@/store/modules/user";
+import SiteInfo from "@/component/siteInfo/siteInfo";
+import LoginForm from "@/component/loginForm";
+import RegisterForm from "@/component/registerForm";
+
+
+const {Title} = Typography
+const items = [
+    {
+        label: (<h3>login</h3>),
+        key: '1',
+        children: <LoginForm/>
+    },
+    {
+        label: (<h3>register</h3>),
+        key: '2',
+        children: <RegisterForm/>
+    },
+]
 
 const Login = () => {
-    const dispatch = useDispatch()
+
+    const [current, setCurrent] = useState('/login')
     const navigate = useNavigate()
-    const onFinish = async (values) => {
-        console.log(values)
-        // 触发异步action fetchLogin
-        dispatch(fetchLogin(values)).then((res) => {
-                console.log("---", res.data)
-            }
-        ).catch(
-            message.error('registration failed')
-        )
-        // 1. 跳转到首页
-        navigate('/')
-        // 2. 提示一下用户
-        message.success('登录成功')
-    }
+    const onClick = (e) => {
+        console.log('click ', e);
+        setCurrent(e.key);
+        navigate(e.key)
+    };
+
+
+
     return (
-        <div className={'login'}>
-            <Card className={"login-form-container flexCenter"}>
-                <img className="login-logo" src={LOGO} alt=""/>
-                <Form
-                    name="normal_login"
-                    className="login-form"
-                    initialValues={{
-                        remember: true,
-                    }}
-                    onFinish={onFinish}
-                    validateTrigger="onBlur"
-                >
-                    <Form.Item
-                        name="email"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your email!',
-                            },
-                        ]}
-                    >
-                        <Input prefix={<UserOutlined className="site-form-item-icon"/>} placeholder="Username"/>
-                    </Form.Item>
-                    <Form.Item
-                        name="pass"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your Password!',
-                            },
-                        ]}
-                    >
-                        <Input
-                            prefix={<LockOutlined className="site-form-item-icon"/>}
-                            type="password"
-                            placeholder="Password"
-                        />
-                    </Form.Item>
-                    <Form.Item>
-                        <Form.Item name="remember" valuePropName="checked" noStyle>
-                            <Checkbox>Remember me</Checkbox>
-                        </Form.Item>
-
-                        <a className="login-form-forgot" href="/user/receivepw">
-                            Forgot password
-                        </a>
-                    </Form.Item>
-
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit" className="login-form-button">
-                            <span>Log in</span>
-                        </Button>
-                        Or <a href="/user/register">register now!</a>
-                    </Form.Item>
-                </Form>
-            </Card>
+        <div className={'login-page'}>
+            <div className={'login-card'}>
+                <Title style={{color: '#1677ff', textAlign: 'center'}}>Lawyer</Title>
+                <Card>
+                    <Tabs defaultActiveKey="1" items={items}  />
+                </Card>
+                <SiteInfo/>
+            </div>
         </div>
     );
 };

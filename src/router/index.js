@@ -9,11 +9,11 @@ import Order from "src/pages/order";
 import Create from "src/pages/create"
 import Message from "src/pages/message";
 import Notification from "src/pages/notification";
-import Register from "@/pages/register";
 import Saved from "@/component/saved";
 import UserInfo from "@/component/userInfo";
-import PostList from "src/component/postlist";
 import Personal from "src/pages/personal";
+import History from "@/component/history";
+import Password from "@/component/password";
 
 const router = createBrowserRouter([
     {
@@ -46,11 +46,15 @@ const router = createBrowserRouter([
                     },
                     {
                         index: true,
-                        element: <PostList/>
+                        element: <History/>
                     },
                     {
                         path: "/user/saved",
                         element: <Saved/>
+                    },
+                    {
+                        path: "/user/password",
+                        element: <Password/>
                     }
                 ]
             },
@@ -70,12 +74,9 @@ const router = createBrowserRouter([
     },
     {
         path: "/login",
-        element: <Login />
+        element: <Login />,
     },
-    {
-        path: "/user/register",
-        element: <Register/>
-    }
+
 
 ])
 

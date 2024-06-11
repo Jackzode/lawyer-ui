@@ -10,9 +10,9 @@ const SiteInfo = () => {
     return (
         <div style={{
             padding: '20px 0',
-            backgroundColor: '#f8f8f8',
+            // backgroundColor: '#f8f8f8',
             textAlign: 'center',
-            borderTop: '1px solid #e8e8e8'
+            // borderTop: '1px solid #e8e8e8'
         }}>
             <Row justify="center" gutter={[16, 16]}>
                 <Col>

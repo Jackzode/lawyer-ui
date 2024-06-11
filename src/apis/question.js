@@ -51,7 +51,7 @@ export function getNotification() {
 
     ]
 }
-export function getHomePageQuestionAPI() {
+export function getHomePageQuestionAPI(page, pageSize) {
     // return request({
     //     url: '/homepageQuestion',
     //     method: 'GET'
@@ -89,7 +89,78 @@ export function getHomePageQuestionAPI() {
             image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
             likes: 100,
             avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-        }
+        },
+        {
+            id: 4,
+            name: "jack",
+            content: "我想学习编程！",
+            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+            likes: 100,
+            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+        },
+        {
+            id: 5,
+            name: "jack",
+            content: "我想学习编程！",
+            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+            likes: 100,
+            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+        },{
+            id: 6,
+            name: "jack",
+            content: "我想学习编程！",
+            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+            likes: 100,
+            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+        },
+        {
+            id: 7,
+            name: "jack",
+            content: "我想学习编程！",
+            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+            likes: 100,
+            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+        },
+        {
+            id: 8,
+            name: "jack",
+            content: "我想学习编程！",
+            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+            likes: 100,
+            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+        },
+        {
+            id: 9,
+            name: "jack",
+            content: "我想学习编程！",
+            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+            likes: 100,
+            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+        },
+        {
+            id: 10,
+            name: "jack",
+            content: "我想学习编程！",
+            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+            likes: 100,
+            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+        },
+        {
+            id: 11,
+            name: "jack",
+            content: "我想学习编程！",
+            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+            likes: 100,
+            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+        },
+        {
+            id: 12,
+            name: "jack",
+            content: "我想学习编程！",
+            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+            likes: 100,
+            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+        },
 
     ]
 

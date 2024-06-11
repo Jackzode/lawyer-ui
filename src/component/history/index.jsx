@@ -1,34 +1,55 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from 'react';
+import {Flex, Pagination, Skeleton} from 'antd';
+import Post from "@/component/post";
 import {getHomePageQuestionAPI} from "@/apis/question";
-import {message} from "antd";
-import PostList from "@/component/postlist";
 
 
-const ContainerHeight = 800;
+
+
+
+
+
 
 const History = () => {
+    //问题列表数据
+    const [history, setHistory] = useState([]);
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(1);
+    const [total, setTotal] = useState(1);
+    const [loading, setLoading] = useState(false);
 
-    const [data, setData] = useState([]);
-
-    const appendData = () => {
-        const body = getHomePageQuestionAPI()
-        const newdata = data.concat(body)
-        setData(newdata);
-        message.success(`${body.length} more items loaded!`);
-    };
     useEffect(() => {
-        appendData();
-    }, []);
-    console.log(data)
-    const onScroll = (e) => {
-        if (Math.abs(e.currentTarget.scrollHeight - e.currentTarget.scrollTop - ContainerHeight) <= 1) {
-            appendData();
-        }
+        setHistory(getHomePageQuestionAPI(page, pageSize));
+        setLoading(false)
+        setTotal(250)
+    }, [page, pageSize]);
+
+    const onPageChange = (current, pageSize) => {
+        console.log(current, pageSize);
+        setPage(page);
+        setPageSize(pageSize);
     };
+
     return (
-        <div>
-            <PostList data={data}  />
-        </div>
-    );
-};
+        <>
+            <div>
+                {history.map(item => (
+                    <Skeleton active loading={loading}>
+                        <Post key={item.id} closeButton={false} post={item}/>
+                    </Skeleton>
+                ))}
+                <div style={{marginBottom: '50px'}}>
+                    <Flex justify={'center'}>
+                        <Pagination
+                            onChange={onPageChange}
+                            total={total}
+                        />
+                    </Flex>
+                </div>
+            </div>
+        </>
+    )
+}
+
+
 export default History;
