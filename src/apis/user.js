@@ -2,11 +2,19 @@
 import { request } from "@/utils"
 // 1. 登录请求
 
-
+export function emailVerify(code){
+    return request({
+        url: "/user/email/verification",
+        method: "get",
+        params: {
+            code: code,
+        }
+    })
+}
 
 export function register(data){
     return request({
-        url: "/painting/user/registerByEmail",
+        url: "/user/registerByEmail",
         method: "post",
         data:data
     })
@@ -14,7 +22,7 @@ export function register(data){
 
 export function getCaptcha() {
     return request({
-        url: "/painting/user/captcha",
+        url: "/user/captcha",
         method: "get",
     })
 }
@@ -22,7 +30,7 @@ export function getCaptcha() {
 
 export function loginAPI (formData) {
     return request({
-        url: '/painting/user/login',
+        url: '/user/login',
         method: 'POST',
         data: formData
     })
@@ -33,7 +41,7 @@ export function loginAPI (formData) {
 
 export function getProfileByEmailAPI (email) {
     return request({
-        url: '/painting/user/getProfileByEmail',
+        url: '/user/personal/profile',
         method: 'GET',
         params: {
             email: email,
@@ -41,9 +49,10 @@ export function getProfileByEmailAPI (email) {
     })
 }
 
-export function getProfileByToken () {
+//todo
+export function getProfileByTokenApi () {
     return request({
-        url: '/painting/user/profile',
+        url: '/user/personal/profile',
         method: 'GET',
     })
 }
@@ -51,7 +60,7 @@ export function getProfileByToken () {
 
 export function getProfileByNameAPI (name) {
     return request({
-        url: '/painting/user/getProfileByName',
+        url: '/user/getProfileByName',
         method: 'GET',
         params: {
             name: name,
@@ -61,7 +70,7 @@ export function getProfileByNameAPI (name) {
 
 export function updateProfile (data){
     return request({
-        url: '/painting/user/updateProfile',
+        url: '/user/personal/profile',
         method: 'POST',
         data: data,
     })

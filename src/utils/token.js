@@ -1,21 +1,21 @@
 // 封装基于ls存取删三个方法
 
-const TOKENKEY = 'token_key'
+const TOKEN_KEY = 'access_token'
 
-function setToken (token) {
-    return localStorage.setItem(TOKENKEY, token)
+function localStorageSetToken (token) {
+    return localStorage.setItem(TOKEN_KEY, token)
 }
 
-function getToken () {
-    return localStorage.getItem(TOKENKEY)
+function localStorageGetToken () {
+    return localStorage.getItem(TOKEN_KEY)
 }
 
-function removeToken () {
-    return localStorage.removeItem(TOKENKEY)
+function localStorageRemoveToken () {
+    return localStorage.removeItem(TOKEN_KEY)
 }
 
 export {
-    setToken,
-    getToken,
-    removeToken
+    localStorageSetToken,
+    localStorageGetToken,
+    localStorageRemoveToken
 }

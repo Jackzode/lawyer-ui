@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Typography, Tabs, Card} from 'antd';
 import "./index.css"
-import {useNavigate} from "react-router-dom";
 import SiteInfo from "@/component/siteInfo/siteInfo";
 import LoginForm from "@/component/loginForm";
 import RegisterForm from "@/component/registerForm";
@@ -22,15 +21,6 @@ const items = [
 ]
 
 const Login = () => {
-
-    const [current, setCurrent] = useState('/login')
-    const navigate = useNavigate()
-    const onClick = (e) => {
-        console.log('click ', e);
-        setCurrent(e.key);
-        navigate(e.key)
-    };
-
 
 
     return (

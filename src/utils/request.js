@@ -1,13 +1,10 @@
 // axios的封装处理
 import axios from "axios"
-import { getToken, removeToken } from "./token"
-import router from "@/router"
-// 1. 根域名配置
-// 2. 超时时间
-// 3. 请求拦截器 / 响应拦截器
+import { localStorageGetToken } from "./token"
+
 
 const request = axios.create({
-    baseURL: 'http://localhost:8081',
+    baseURL: 'http://localhost:8081/painting',
     timeout: 5000
 })
 
@@ -17,9 +14,9 @@ request.interceptors.request.use((config) => {
     // 操作这个config 注入token数据
     // 1. 获取到token
     // 2. 按照后端的格式要求做token拼接
-    const token = getToken()
+    const token = localStorageGetToken()
     if (token) {
-        config.headers.Authorization = `Bearer ${token}`
+        config.headers["lawyer-token"] = token
     }
     return config
 }, (error) => {

@@ -78,7 +78,6 @@ const Comments = () => {
     };
 
     const handleEmojiSelect = (emoji) => {
-        console.log(emoji);
         setInputValue(inputValue + emoji.native);
         setShowEmojiPicker(false);
     };

@@ -3,9 +3,10 @@ import LOGO from "@/assets/logo/blue-logo.png"
 import "./header.css"
 import AvatarApp from "@/component/avatar"
 import { useNavigate} from "react-router-dom"
-import {getToken} from "@/utils";
+
 import {Button, Flex, Image, Input} from "antd";
 import HeadMenu from "@/component/headmenu";
+import {useSelector} from "react-redux";
 
 const { Search } = Input;
 
@@ -14,12 +15,12 @@ const { Search } = Input;
 
 const Header = () => {
 
-    const isLogin = !!getToken();
+    const isLogin = useSelector(state => state.user.token);
     const navigate = useNavigate()
     const clickLogo = ()=>{
         navigate("/");
     }
-
+    // todo
     const onSearch = (value, _e, info) => console.log(info?.source, value);
 
 

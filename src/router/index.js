@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router-dom"
+import {createBrowserRouter, Router} from "react-router-dom"
 import Login from "src/pages/login"
 import Test from "@/pages/test"
 import React from 'react';
@@ -14,6 +14,8 @@ import UserInfo from "@/component/userInfo";
 import Personal from "src/pages/personal";
 import History from "@/component/history";
 import Password from "@/component/password";
+import EmailVerifyPage from "@/pages/emailverify";
+import HelpPage from "@/pages/help";
 
 const router = createBrowserRouter([
     {
@@ -76,6 +78,14 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
     },
+    {
+        path: "/email/verification",
+        element: <EmailVerifyPage/>,
+    },
+    {
+        path: "/help",
+        element: <HelpPage/>
+    }
 
 
 ])

@@ -10,16 +10,19 @@ const RegisterForm = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const onFinish = (value) => {
-        console.log('Form values:', value)
         register(value)
             .then((response) => {
-                console.log("response: ", response)
-                message.success('successfully registered');
-                dispatch(setToken(response.data.access_token))
-                dispatch(setUserInfo(response.data))
-                navigate('/'); // 注册成功后跳转到主页
+                if (response.code !== 0 ) {
+                    message.error('registration failed');
+                }else{
+                    dispatch(setToken(response.data.token))
+                    dispatch(setUserInfo(response.data))
+                    message.success('successfully registered');
+                    navigate('/'); // 注册成功后跳转到主页
+                }
             })
             .catch((error) => {
+                console.log(error)
                 message.error('registration failed');
             });
     };
@@ -30,7 +33,6 @@ const RegisterForm = () => {
             <Form
                 style={{width: '80%'}}
                 layout="vertical"
-                vertical={true} align={'center'} justify={'center'}
                 onFinish={onFinish}
                 name="register-form"
                 labelAlign="left"

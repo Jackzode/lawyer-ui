@@ -1,10 +1,11 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import { useNavigate} from "react-router-dom"
-import {Avatar,  Dropdown, message} from "antd"
+import {Avatar,  Dropdown} from "antd"
 import "./index.css"
-import {useDispatch} from "react-redux"
-import {clearUserInfo} from "@/store/modules/user";
+import {useDispatch, useSelector} from "react-redux"
+import {clearUserInfoAndToken, setUserInfo} from "@/store/modules/user";
 import {LogoutOutlined, PoweroffOutlined, SettingOutlined} from "@ant-design/icons";
+import {getProfileByTokenApi} from "@/apis/user";
 
 const items = [
     { label: 'account', key: '/user/profile', icon:<PoweroffOutlined/> }, // remember to pass the key prop
@@ -16,22 +17,39 @@ const AvatarApp = () => {
 
     const dispatch = useDispatch()
     const navigator = useNavigate()
+    const [avatar, setAvatar] = useState('')
     const logoutHandler = () => {
-        dispatch(clearUserInfo())
+        dispatch(clearUserInfoAndToken())
         navigator("/")
-        message.success("logout...")
     }
 
     const handleMenuClick = (e) => {
         console.log(e.key)
-        // switch (key) {
-        //     case '/logout':
-        //         logoutHandler();
-        //         break;
-        //     default:
-        //         navigator(key);
-        // }
+        switch (e.key) {
+            case '/logout':
+                logoutHandler();
+                break;
+            default:
+                navigator(e.key);
+        }
     }
+    const localAvatar = useSelector(state => state.user.userInfo.avatar)
+
+    useEffect(() => {
+        if (localAvatar) {
+            setAvatar(localAvatar)
+        }else{
+            getProfileByTokenApi().then((res)=>{
+                    setAvatar(res.data.avatar)
+                    dispatch(setUserInfo(res.data))
+                }
+            ).catch(error => {
+                console.log(error)
+            })
+        }
+    }, [])
+
+
 
     return (
         <Dropdown menu={{
@@ -40,8 +58,8 @@ const AvatarApp = () => {
         }} trigger={['click']} >
             <Avatar shape="square"
                     style={{cursor: 'pointer'}}
-                    src='https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg'
-                    alt=''/>
+                    src={avatar}
+                    alt='failed' />
         </Dropdown>
     );
 }

@@ -1,10 +1,4 @@
 import React from 'react';
-import {Layout, Input, Badge, Avatar, List, Button, theme} from 'antd';
-import {
-    SearchOutlined,
-    SmileOutlined,
-    PlusOutlined,
-} from '@ant-design/icons';
 import './index.css';
 
 

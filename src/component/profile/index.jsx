@@ -4,16 +4,36 @@ import {
     UserOutlined,
 } from "@ant-design/icons";
 import "./index.css"
-import React from "react";
+import React, {useEffect, useState} from "react";
 import SideBar from "@/component/siderbar";
+import {useDispatch, useSelector} from "react-redux";
+import {getProfileByTokenApi} from "@/apis/user";
+import {setUserInfo} from "@/store/modules/user";
+import {useNavigate} from "react-router-dom";
 
 
 
 
 
-const Profile = ({userInfo}) => {
+const Profile = () => {
 
+    const dispatch = useDispatch()
+    const userInfo = useSelector(state => state.user.userInfo)
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (!userInfo) {
+            getProfileByTokenApi().then((res)=>{
+                    dispatch(setUserInfo(res.data))
+                }
+            ).catch(error => {
+                console.log(error)
+            })
+        }
+    }, [])
 
+    const clickProfile = ()=>{
+        navigate('/user', {state: userInfo})
+    }
 
     return (
         <>
@@ -23,19 +43,20 @@ const Profile = ({userInfo}) => {
                         <div>
                             <Avatar
                                 src={<img
-                                    src={'https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg'}
+                                    src={userInfo.avatar}
                                     alt={""}/>}
                                 size={80}
                                 shape="circle"
                             />
                         </div>
-                        <h2>jack</h2>
-                        <div>software engineer</div>
+                        <h2>{userInfo.username}</h2>
+                        <div>{userInfo.bio}</div>
                     </Flex>
-                    <div><UserOutlined/> Follow &nbsp; 1000</div>
+                    <div><UserOutlined/> Follow &nbsp; {userInfo.follow_count}</div>
+                    {/*todo {userInfo.likes}*/}
                     <div><StarOutlined/> Likes &nbsp; 1000</div>
                     <div style={{marginTop: 16}}>
-                        <Button type="primary" block href={"/user"}>My Profile</Button>
+                        <Button type="primary" block onClick={clickProfile}>My Profile</Button>
                     </div>
                 </Flex>
             </Card>

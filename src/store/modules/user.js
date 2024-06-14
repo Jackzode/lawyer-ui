@@ -1,16 +1,17 @@
-// 和用户相关的状态管理
+
 
 import { createSlice } from '@reduxjs/toolkit'
-import { setToken as _setToken, getToken, removeToken } from '@/utils'
-import { loginAPI, getProfileByToken } from '@/apis/user'
-import {message} from "antd";
+import {localStorageSetToken,
+    localStorageGetToken,
+    localStorageRemoveToken } from '@/utils'
+import { loginAPI, getProfileByTokenApi } from '@/apis/user'
+
 
 const userStore = createSlice({
     name: "user",
     // 数据状态
     initialState: {
-        isLogin: false,
-        token: getToken() || '',
+        token: localStorageGetToken() || '',
         userInfo: {}
     },
     // 同步修改方法
@@ -20,15 +21,15 @@ const userStore = createSlice({
         },
         setToken (state, action) {
             state.token = action.payload
-            _setToken(action.payload)
+            localStorageSetToken(action.payload)
         },
         setUserInfo (state, action) {
             state.userInfo = action.payload
         },
-        clearUserInfo (state) {
+        clearUserInfoAndToken (state) {
             state.token = ''
             state.userInfo = {}
-            removeToken()
+            localStorageRemoveToken()
         }
     }
 })
@@ -36,7 +37,7 @@ const userStore = createSlice({
 
 // 解构出actionCreater
 
-const { setIsLogin, setToken, setUserInfo, clearUserInfo } = userStore.actions
+const { setIsLogin, setToken, setUserInfo, clearUserInfoAndToken } = userStore.actions
 
 // 获取reducer函数
 
@@ -46,8 +47,7 @@ const userReducer = userStore.reducer
 const fetchLogin = (loginForm) => {
     return async (dispatch) => {
         const response = await loginAPI(loginForm)
-        dispatch(setToken(response.data.token))
-        dispatch(setUserInfo(response.data))
+        dispatch(setToken(response.token))
         return response
     }
 }
@@ -55,7 +55,7 @@ const fetchLogin = (loginForm) => {
 // 获取个人用户信息异步方法
 const fetchUserInfo = () => {
     return async (dispatch) => {
-        const res =  getProfileByToken()
+        const res =  getProfileByTokenApi()
         dispatch(setUserInfo(res.data))
     }
 
@@ -63,6 +63,6 @@ const fetchUserInfo = () => {
 
 
 
-export { fetchLogin, fetchUserInfo, clearUserInfo, setIsLogin , setToken, setUserInfo}
+export { fetchLogin, fetchUserInfo, clearUserInfoAndToken, setIsLogin , setToken, setUserInfo}
 
 export default userReducer

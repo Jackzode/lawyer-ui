@@ -1,6 +1,5 @@
 import React from 'react';
 import {Card, Avatar, Button, Row, Col, Typography} from 'antd';
-import {CloseOutlined} from '@ant-design/icons';
 import './index.scss'
 import lgo from "@/assets/avatar/logo300.png"
 
