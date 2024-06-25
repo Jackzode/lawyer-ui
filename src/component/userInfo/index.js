@@ -42,7 +42,7 @@ const UserInfo = () => {
         }
         // 获取城市ID
         if (value.location) {
-            value.city_id = value.location[value.location.length - 1]
+            value.cityId = value.location[value.location.length - 1]
             delete value.location; // 删除location字段，因为我们只需要城市ID
         }
         console.log("save-input-after--", value)

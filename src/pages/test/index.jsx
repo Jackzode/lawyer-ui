@@ -1,65 +1,96 @@
-import React from 'react';
-import { Form, Input, Button, Tabs, Row, Col } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import './index.css';
+import React, { useState, useEffect } from 'react';
+import { Tabs, Card, List } from 'antd';
+import axios from 'axios';  // 假设我们从服务器获取数据
 
-const { TabPane } = Tabs;
 
-const LoginPage = () => {
-    const onFinish = (values) => {
-        console.log('Received values of form: ', values);
+const mockFetchLatestPosts = () => {
+    return Promise.resolve([
+        {
+            id: 1,
+            title: "最新文章 1",
+            content: "这是最新文章 1 的内容。",
+        },
+        {
+            id: 2,
+            title: "最新文章 2",
+            content: "这是最新文章 2 的内容。",
+        },
+        // 添加更多最新文章
+    ]);
+};
+
+const mockFetchRecommendedPosts = () => {
+    return Promise.resolve([
+        {
+            id: 1,
+            title: "推荐文章 1",
+            content: "这是推荐文章 1 的内容。",
+        },
+        {
+            id: 2,
+            title: "推荐文章 2",
+            content: "这是推荐文章 2 的内容。",
+        },
+        // 添加更多推荐文章
+    ]);
+};
+
+const BlogTabs = () => {
+    const [activeTab, setActiveTab] = useState('1');
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        if (activeTab === '1') {
+            mockFetchLatestPosts().then(
+                (res) => {
+                    console.log(res);
+                    setPosts(res);
+                }
+            );
+        } else if (activeTab === '2') {
+            mockFetchRecommendedPosts().then(
+                (res) => {
+                    console.log(res);
+                    setPosts(res);
+                }
+            );
+        }
+    }, [activeTab]);
+
+    const handleTabChange = (key) => {
+        setActiveTab(key);
     };
 
+    const renderPosts = () => (
+        <List
+            dataSource={posts}
+            renderItem={post => (
+                <List.Item key={post.id}>
+                    <Card title={post.title}>
+                        {post.content}
+                    </Card>
+                </List.Item>
+            )}
+        />
+    );
+
+    const items = [
+        {
+            key: '1',
+            label: 'Newest',
+            children: renderPosts(),
+        },
+        {
+            key: '2',
+            label: 'Recommended',
+            children: renderPosts(),
+        },
+    ];
+
     return (
-        <div className="login-page">
-            <Row justify="center" align="middle" style={{ minHeight: '100vh' }}>
-                <Col>
-                    <div className="login-container">
-                        <div className="login-header">
-                            <h1>知乎</h1>
-                            <p>有问题，就会有答案</p>
-                        </div>
-                        <Tabs defaultActiveKey="1">
-                            <TabPane tab="密码登录" key="1">
-                                <Form name="login" onFinish={onFinish}>
-                                    <Form.Item
-                                        name="username"
-                                        rules={[{ required: true, message: '请输入你的手机号或邮箱!' }]}
-                                    >
-                                        <Input prefix={<UserOutlined />} placeholder="手机号或邮箱" />
-                                    </Form.Item>
-                                    <Form.Item
-                                        name="password"
-                                        rules={[{ required: true, message: '请输入你的密码!' }]}
-                                    >
-                                        <Input
-                                            prefix={<LockOutlined />}
-                                            type="password"
-                                            placeholder="密码"
-                                        />
-                                    </Form.Item>
-                                    <Form.Item>
-                                        <Button type="primary" htmlType="submit" className="login-form-button">
-                                            登录
-                                        </Button>
-                                    </Form.Item>
-                                </Form>
-                                <a href="/">忘记密码</a>
-                            </TabPane>
-                            <TabPane tab="验证码登录" key="2">
-                                {/* 验证码登录表单 */}
-                            </TabPane>
-                        </Tabs>
-                        <div className="other-login-methods">
-                            <p>其他登录方式：</p>
-                            <Button type="link">微信</Button>
-                            <Button type="link">微博</Button>
-                        </div>
-                    </div>
-                </Col>
-            </Row>
-        </div>
+        <Tabs items={items} onChange={handleTabChange} activeKey={activeTab}>
+        </Tabs>
     );
 };
 
-export default LoginPage;
+export default BlogTabs;

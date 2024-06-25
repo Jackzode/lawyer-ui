@@ -9,12 +9,14 @@ import {
 } from '@ant-design/icons';
 import "./index.css"
 import Comments from "@/component/comment";
+import parse from 'html-react-parser';
+import DOMPurify from 'dompurify';
 
 const {Meta} = Card;
 const {Paragraph} = Typography;
 
 
-const Post = ({ hasSave, closeButton, post}) => {
+const Post = ({hasSave, closeButton, post}) => {
 
     const [visible, setVisible] = useState(true);
     const [showComments, setShowComments] = useState(false);
@@ -22,6 +24,10 @@ const Post = ({ hasSave, closeButton, post}) => {
     const handleClose = () => {
         setVisible(false);
     };
+
+    const [expanded, setExpanded] = useState(false);
+
+    const purePost = DOMPurify.sanitize(post.content)
 
 
     const toggleComments = () => {
@@ -53,17 +59,31 @@ const Post = ({ hasSave, closeButton, post}) => {
                                   </span>
                               </div>
                               {closeButton && <div>
-                                  <Button onClick={handleClose} icon={<CloseCircleOutlined/>} type={'text'} size="small"/>
+                                  <Button onClick={handleClose} icon={<CloseCircleOutlined/>} type={'text'}
+                                          size="small"/>
                               </div>}
                           </Flex>
                       }
                 />
-                <div>
-                    <Paragraph onClick={toggleExpansion}>
-                        <div className={'post-content ' + (isExpanded ? '' : 'post-truncate-text')}
-                             dangerouslySetInnerHTML={{__html: post.content}}/>
-                    </Paragraph>
-                </div>
+
+                <Paragraph
+                    className={'post-content '}
+                    ellipsis={
+                        {
+                            rows: 10,
+                            expandable: true,
+                            symbol: 'more',
+                            expanded,
+                            onExpand: (_, info) => setExpanded(info.expanded),
+
+                        }
+                    }
+                >
+                    {parse(purePost)}
+                    {/*dangerouslySetInnerHTML={{__html: post.content}}*/}
+                    {/*<div className={'post-content '}>{parse(purePost)}</div>*/}
+                </Paragraph>
+
                 <Divider style={{margin: "5px 0"}}/>
                 <Row justify={'space-evenly'} align={'middle'}>
                     <Col span={6}>

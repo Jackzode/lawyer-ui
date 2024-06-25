@@ -1,5 +1,19 @@
 import {request} from "@/utils";
 
+
+export function addQuestion(data) {
+    return request({
+        url: '/post/addPost',
+        method: 'POST',
+        data: data
+    })
+}
+
+
+
+
+
+
 export function getNotification() {
     return [
         {
@@ -51,119 +65,53 @@ export function getNotification() {
 
     ]
 }
-export function getHomePageQuestionAPI(page, pageSize) {
-    // return request({
-    //     url: '/homepageQuestion',
-    //     method: 'GET'
-    // })
-    return [
-        {
-            id: 1,
-            name: "jack",
-            content: " <p>This is the initial content of the editor.卡号的看法哈口电话</p>\n" +
-                "<h3>拉萨的库哈斯</h3>\n" +
-                "<h3>拉萨的库哈斯</h3>\n" +
-                "<h3>拉萨的库哈斯</h3>\n" +
-                "<h3>拉萨的库哈斯</h3>\n" +
-                "<h3>拉萨的库哈斯</h3>\n" +
-                "<h3>拉萨的库哈斯</h3>\n" +
-                "<h3>拉萨的库哈斯</h3>\n" +
-                "<p><span style=\"font-family: impact, sans-serif;\"><em><strong>啊打发</strong></em></span></p>\n" +
-                "<p><img src=\"https://dimg04.c-ctrip.com/images/0M73s12000b7e01kk0103.png_.webp\" alt=\"\" width=\"1000\" height=\"667\"></p>",
-            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-            likes: 100,
-            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-        },
-        {
-            id: 2,
-            name: "jack",
-            content: "我想学习编程！",
-            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-            likes: 100,
-            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-        },
-        {
-            id: 3,
-            name: "jack",
-            content: "我想学习编程！",
-            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-            likes: 100,
-            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-        },
-        {
-            id: 4,
-            name: "jack",
-            content: "我想学习编程！",
-            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-            likes: 100,
-            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-        },
-        {
-            id: 5,
-            name: "jack",
-            content: "我想学习编程！",
-            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-            likes: 100,
-            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-        },{
-            id: 6,
-            name: "jack",
-            content: "我想学习编程！",
-            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-            likes: 100,
-            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-        },
-        {
-            id: 7,
-            name: "jack",
-            content: "我想学习编程！",
-            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-            likes: 100,
-            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-        },
-        {
-            id: 8,
-            name: "jack",
-            content: "我想学习编程！",
-            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-            likes: 100,
-            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-        },
-        {
-            id: 9,
-            name: "jack",
-            content: "我想学习编程！",
-            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-            likes: 100,
-            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-        },
-        {
-            id: 10,
-            name: "jack",
-            content: "我想学习编程！",
-            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-            likes: 100,
-            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-        },
-        {
-            id: 11,
-            name: "jack",
-            content: "我想学习编程！",
-            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-            likes: 100,
-            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-        },
-        {
-            id: 12,
-            name: "jack",
-            content: "我想学习编程！",
-            image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-            likes: 100,
-            avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
-        },
-
-    ]
-
+export  function getQuestionAPI(page, pageSize, cond) {
+    return request({
+        url: '/post/getPost',
+        method: 'GET',
+        data : {
+            page: page,
+            pageSize: pageSize,
+            cond: cond,
+        }
+    })
+    // const response = new Promise((resolve) => {
+    //     setTimeout(() => {
+    //
+    //         const totalItems = 50; // Assume there are a total of 50 items
+    //         const data = Array.from({length: pageSize}, (_, index) => ({
+    //             id: (page - 1) * pageSize + index + 1,
+    //             name: "jack",
+    //             content:
+    //                 "<h3>拉萨的库哈斯</h3>\n" +
+    //                 "您可以在文件URL中通过添加处理参数来处理文件。\n" +
+    //                 "\n" +
+    //                 "对于允许匿名访问的公共读或者公共读写文件，可以直接在文件URL中通过添加处理参数的方式处理文件。对于不允许匿名访问的私有文件，需要通过SDK的方式将处理操作加入签名URL中。\n" +
+    //                 "\n" +
+    //                 "目前文档处理不支持匿名访问。\n" +
+    //                 "\n" +
+    //                 "通过文件URL访问图片时，默认是下载行为。如需确保通过文件URL访问图片时是预览行为，您需要绑定自定义域名并添加CNAME记录。具体操作，请参见绑定自定义域名至Bucket默认域名。" +
+    //                 "<h3>拉萨的库哈斯</h3>\n" +
+    //                 "<h3>拉萨的库哈斯</h3>\n" +
+    //                 "<h3>拉萨的库哈斯</h3>\n" +
+    //                 "<h3>拉萨的库哈斯</h3>\n" +
+    //                 "<h3>拉萨的库哈斯</h3>\n" +
+    //                 "<h3>拉萨的库哈斯</h3>\n" +
+    //                 "<h3>拉萨的库哈斯</h3>\n" +
+    //                 "<h3>拉萨的库哈斯</h3>\n" +
+    //                 "<h3>拉萨的库哈斯</h3>\n" +
+    //                 "<h3>拉萨的库哈斯</h3>\n" +
+    //                 "<h3>拉萨的库哈斯</h3>\n" +
+    //                 "<p><span style=\"font-family: impact, sans-serif;\"><em><strong>啊打发</strong></em></span></p>\n" +
+    //                 "<p><img src=\"https://dimg04.c-ctrip.com/images/0M73s12000b7e01kk0103.png_.webp\" alt=\"\" width=\"1000\" height=\"667\"></p>",
+    //             image: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+    //             likes: 100,
+    //             avatar: "https://app2.sweden.com/wp-content/uploads/2019/10/Hawaii_TopSites_WaikikiBeach.jpg",
+    //         }));
+    //         resolve({data, total: totalItems});
+    //     }, 1000);
+    // });
+    // return response
 }
 
 

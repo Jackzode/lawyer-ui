@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {List, message} from 'antd';
 import VirtualList from 'rc-virtual-list';
 import Post from "@/component/post";
-import {getHomePageQuestionAPI} from "@/apis/question";
+import {getQuestionAPI} from "@/apis/question";
 
 
 const ContainerHeight = 800;
@@ -13,11 +13,20 @@ const PostList = () => {
     const [data, setData] = useState([]);
 
     const appendData = () => {
-        const body = getHomePageQuestionAPI()
-        const newdata = data.concat(body)
-        setData(newdata);
-        message.success(`${body.length} more items loaded!`);
+
+        getQuestionAPI().then(
+            response => {
+                console.log("response--", response);
+                setData((prev) => [...prev, ...response.data]);
+            },
+        ).catch(
+            error => {
+                console.log(error);
+                message.error("sorry, internal error")
+            }
+        )
     };
+
     useEffect(() => {
         appendData();
     }, []);
@@ -49,4 +58,3 @@ const PostList = () => {
         </div>
     );
 };
-export default PostList;

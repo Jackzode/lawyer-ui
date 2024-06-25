@@ -69,9 +69,22 @@ export function getProfileByNameAPI (name) {
 }
 
 export function updateProfile (data){
+    console.log("data---", data)
     return request({
         url: '/user/personal/profile',
         method: 'POST',
         data: data,
+    })
+}
+
+
+export function uploadAvatar (file) {
+    return request({
+        url: '/user/personal/uploadAvatar',
+        method: 'POST',
+        data: file,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
     })
 }

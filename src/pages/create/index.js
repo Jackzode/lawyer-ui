@@ -1,83 +1,137 @@
-import React, {useState} from 'react';
-import {Editor} from '@tinymce/tinymce-react';
+import React, {useState, useEffect, useRef} from 'react';
+import ReactQuill from 'react-quill';
 import {Button, Card, Flex, Form, Input, message, Select, Radio} from "antd";
-const { Option } = Select;
+import 'react-quill/dist/quill.snow.css';
+import {addQuestion} from "@/apis/question";
+import {useNavigate} from "react-router-dom";
+
+
+const {Option} = Select;
 
 const MyForm = () => {
 
 
     const [editorContent, setEditorContent] = useState('');
-
+    const navigate = useNavigate()
     const onFinish = (values) => {
-        console.log('Form values:', values);
         console.log('Editor content:', editorContent);
-        message.success('Form submitted successfully');
+        values.content = editorContent;
+        console.log('Form values:', values);
+        addQuestion(values).then((res) => {
+            if (res.code === 0) {
+                message.success('post successfully');
+                navigate('/')
+            }else{
+                throw new Error("post failed")
+            }
+        }).catch(
+            (error) => {
+                console.log(error)
+            }
+        )
     };
     return (
+
         <Form
             layout="vertical"
             onFinish={onFinish}
-            style={{width: '1000px'}}
+            style={{width: '55rem', height: 'auto'}}
         >
             <Flex>
                 <Form.Item style={{width: '800px', marginRight: '20px'}}>
-                    <Editor
-                        apiKey='982gfbm5v9ur4d05xjmtfphxoz4xgo1tyfwte508gknm8u5t'
-                        // onInit={(_evt, editor) => editorRef.current = editor}
-                        initialValue="<p>This is the initial content of the editor.</p>"
-                        init={{
-                            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
-                            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                            tinycomments_mode: 'embedded',
-                            tinycomments_author: 'Author name',
-                            mergetags_list: [
-                                {value: 'First.Name', title: 'First Name'},
-                                {value: 'Email', title: 'Email'},
+                    <ReactQuill
+                        theme="snow"
+                        style={{height: '30rem'}} // 直接设置高度
+                        onChange={(content) => {
+                            setEditorContent(content)
+                        }}
+                        modules={{
+                            toolbar: [
+                                [{'header': [1, 2, false]}],
+                                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+                                ['link', 'image'],
+                                ['clean']
                             ],
                         }}
-                        onEditorChange={(content) => setEditorContent(content)}
-                    />
+                        formats={[
+                            'header',
+                            'bold', 'italic', 'underline', 'strike', 'blockquote',
+                            'list', 'bullet', 'indent',
+                            'link', 'image'
+                        ]}
+                    >
+                        {/*<div style={{height: '500px'}}></div>*/}
+                    </ReactQuill>
                 </Form.Item>
-                <Flex vertical style={{width: '240px'}}>
-                    <Card style={{marginBottom: '10px'}}>
-                        <Form.Item label="copyright" name="copyright" style={{marginBottom: '5px'}}>
-                            <Select>
-                                <Option value="0">none</Option>
-                                <Option value="1">no.1</Option>
-                                <Option value="2">no.2</Option>
+
+                <Flex vertical style={{width: '20rem'}}>
+                    <Card>
+                        <Form.Item label="copyright" name="copyright"
+                                   rules={[
+                                       {
+                                           required: true,
+                                       },
+                                   ]}
+                        >
+                            <Select defaultValue={'0'}>
+                                <Option value='0' >None</Option>
+                                <Option value='1'>No.1</Option>
+                                <Option value="2">No.2</Option>
                             </Select>
                         </Form.Item>
-                        <Form.Item label="introduce in one word" name="introduction" style={{marginBottom: '5px'}}>
-                            <Input suffix={<a href="/">edit</a>}/>
+                        <Form.Item label="introduce in one word" name="introduction"
+                                   rules={[
+                                       {
+                                           required: true,
+                                       },
+                                   ]}
+                        >
+                            <Input/>
                         </Form.Item>
 
-                        <Form.Item label="Allow Reprint" name="reprint" style={{marginBottom: '5px'}}>
-                            <Select>
-                                <Option value="0">no</Option>
-                                <Option value="1">yes</Option>
+                        <Form.Item label="Allow Reprint" name="reprint"
+                                   rules={[
+                                       {
+                                           required: true,
+                                       },
+                                   ]}
+                        >
+                            <Select defaultValue={'1'}>
+                                <Option value="0">No</Option>
+                                <Option value="1">Yes</Option>
                             </Select>
                         </Form.Item>
-                        <Form.Item label="Allow Comment" name="comments" style={{marginBottom: '5px'}}>
-                            <Select>
-                                <Option value="1">anyone</Option>
-                                <Option value="0">my follower</Option>
+                        <Form.Item label="Allow Comment" name="comments"
+                                   rules={[
+                                       {
+                                           required: true,
+                                       },
+                                   ]}
+                        >
+                            <Select defaultValue={'1'}>
+                                <Option value="1">Anyone</Option>
+                                <Option value="0">Follower</Option>
                             </Select>
                         </Form.Item>
-                        <Form.Item label="Feeds to Follower" style={{marginBottom: '0px'}}>
-                            <Radio.Group >
-                                <Radio value="open">open</Radio>
-                                <Radio value="close">close</Radio>
+                        <Form.Item label="Feeds to Follower" >
+                            <Radio.Group defaultValue={'open'}>
+                                <Radio value="open" >Open</Radio>
+                                <Radio value="close">Close</Radio>
                             </Radio.Group>
                         </Form.Item>
+
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit" style={{width: '100%'}}>
+                                Submit
+                            </Button>
+                        </Form.Item>
                     </Card>
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit" style={{width: '100%'}}>
-                            Submit
-                        </Button>
-                    </Form.Item>
                 </Flex>
+
             </Flex>
         </Form>
+
     )
 }
 
