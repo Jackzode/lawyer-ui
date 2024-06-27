@@ -1,96 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import { Tabs, Card, List } from 'antd';
-import axios from 'axios';  // 假设我们从服务器获取数据
+import React from 'react';
+import moment from 'moment';
 
+const TimeDisplay = ({ timestamp }) => {
+    const now = moment();
+    const postTime = moment(timestamp * 1000); // 将秒级时间戳转换为毫秒级时间戳
 
-const mockFetchLatestPosts = () => {
-    return Promise.resolve([
-        {
-            id: 1,
-            title: "最新文章 1",
-            content: "这是最新文章 1 的内容。",
-        },
-        {
-            id: 2,
-            title: "最新文章 2",
-            content: "这是最新文章 2 的内容。",
-        },
-        // 添加更多最新文章
-    ]);
-};
+    // 计算时间差
+    const diffMinutes = now.diff(postTime, 'minutes');
+    const diffHours = now.diff(postTime, 'hours');
+    const diffDays = now.diff(postTime, 'days');
 
-const mockFetchRecommendedPosts = () => {
-    return Promise.resolve([
-        {
-            id: 1,
-            title: "推荐文章 1",
-            content: "这是推荐文章 1 的内容。",
-        },
-        {
-            id: 2,
-            title: "推荐文章 2",
-            content: "这是推荐文章 2 的内容。",
-        },
-        // 添加更多推荐文章
-    ]);
-};
-
-const BlogTabs = () => {
-    const [activeTab, setActiveTab] = useState('1');
-    const [posts, setPosts] = useState([]);
-
-    useEffect(() => {
-        if (activeTab === '1') {
-            mockFetchLatestPosts().then(
-                (res) => {
-                    console.log(res);
-                    setPosts(res);
-                }
-            );
-        } else if (activeTab === '2') {
-            mockFetchRecommendedPosts().then(
-                (res) => {
-                    console.log(res);
-                    setPosts(res);
-                }
-            );
-        }
-    }, [activeTab]);
-
-    const handleTabChange = (key) => {
-        setActiveTab(key);
-    };
-
-    const renderPosts = () => (
-        <List
-            dataSource={posts}
-            renderItem={post => (
-                <List.Item key={post.id}>
-                    <Card title={post.title}>
-                        {post.content}
-                    </Card>
-                </List.Item>
-            )}
-        />
-    );
-
-    const items = [
-        {
-            key: '1',
-            label: 'Newest',
-            children: renderPosts(),
-        },
-        {
-            key: '2',
-            label: 'Recommended',
-            children: renderPosts(),
-        },
-    ];
+    let displayTime;
+    if (diffMinutes < 60) {
+        // 如果时间差小于1小时，显示分钟
+        displayTime = `${diffMinutes} 分钟前`;
+    } else if (diffHours < 24) {
+        // 如果时间差小于1天，显示小时
+        displayTime = `${diffHours} 小时前`;
+    } else if (diffDays < 3) {
+        // 如果时间差小于3天，显示天数
+        displayTime = `${diffDays} 天前`;
+    } else {
+        // 否则显示具体日期
+        displayTime = postTime.format('YYYY-MM-DD');
+    }
 
     return (
-        <Tabs items={items} onChange={handleTabChange} activeKey={activeTab}>
-        </Tabs>
+        <div>
+            <p>发布时间: {displayTime}</p>
+        </div>
     );
 };
 
-export default BlogTabs;
+// 示例秒级时间戳
+const exampleTimestamp = 1719336929; // 示例时间戳（以秒为单位）
+
+const App = () => {
+    return (
+        <div>
+            <h1>博客时间显示示例</h1>
+            <TimeDisplay timestamp={exampleTimestamp} />
+        </div>
+    );
+};
+
+export default App;

@@ -4,20 +4,22 @@ import {
     LikeOutlined,
     CommentOutlined,
     SendOutlined,
-    CloseCircleOutlined,
-    SaveOutlined
+    SaveOutlined, CloseOutlined
 } from '@ant-design/icons';
-import "./index.css"
+import "./index.scss"
 import Comments from "@/component/comment";
 import parse from 'html-react-parser';
 import DOMPurify from 'dompurify';
+import {default_avatar_png} from '@/data/data'
+import TimeDisplay from "@/component/timeDisplay";
+
+
 
 const {Meta} = Card;
-const {Paragraph} = Typography;
+const {Paragraph, Text} = Typography;
 
 
 const Post = ({hasSave, closeButton, post}) => {
-
     const [visible, setVisible] = useState(true);
     const [showComments, setShowComments] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
@@ -42,27 +44,26 @@ const Post = ({hasSave, closeButton, post}) => {
 
     return (
         <div style={{width: "100%"}}>
-            <Card
-                hoverable={true}
+            <div
                 style={{marginBottom: 10}}
             >
                 <Meta style={{marginBottom: '10px'}}
-                      avatar={<Avatar className={'flexCenter'} src={post.avatar}/>}
+                      avatar={<Avatar size={65} shape={"square"} className={'flexCenter'} src={post.authorInfo.avatar || default_avatar_png}/>}
                       title={
-                          <Flex justify={'space-between'} align={'center'}>
-                              <div>
-                                  <span>{post.name}</span>
-                                  <span>
-                                      <Button type="link" size="small" style={{marginLeft: 8}}>
-                                        follow
-                                      </Button>
-                                  </span>
-                              </div>
-                              {closeButton && <div>
-                                  <Button onClick={handleClose} icon={<CloseCircleOutlined/>} type={'text'}
-                                          size="small"/>
-                              </div>}
-                          </Flex>
+                          <div >
+                              <Flex justify={'space-between'} align={'center'}>
+                                  <div>
+                                      {post.authorInfo.username || "undefine"}
+                                      <Button type="text" size="small" style={{color:"blue"}}>Follow</Button>
+                                  </div>
+                                  {closeButton && <Button onClick={handleClose} icon={<CloseOutlined />} type={'text'} size="small"/>}
+                                  </Flex>
+                              <Flex>
+                                  <Text style={{color: "#8f9595", fontSize: "0.8rem"}}>{post.authorInfo.description||"no introduction"}</Text>
+                              </Flex>
+                              <TimeDisplay timestamp={post.created_at}></TimeDisplay>
+
+                          </div>
                       }
                 />
 
@@ -84,10 +85,10 @@ const Post = ({hasSave, closeButton, post}) => {
                     {/*<div className={'post-content '}>{parse(purePost)}</div>*/}
                 </Paragraph>
 
-                <Divider style={{margin: "5px 0"}}/>
-                <Row justify={'space-evenly'} align={'middle'}>
+
+                <Row justify={'space-evenly'} align={'middle'} className={'post-button'}>
                     <Col span={6}>
-                        <Button size={'large'} style={{width: '100%'}} type="text"
+                        <Button size={'large'} type="text"
                                 icon={<LikeOutlined/>}>
                             Like
                         </Button>
@@ -110,7 +111,7 @@ const Post = ({hasSave, closeButton, post}) => {
                     </Col>
                 </Row>
                 {showComments && (<Comments/>)}
-            </Card>
+            </div>
 
         </div>
     )

@@ -36,7 +36,6 @@ const UserInfo = () => {
     }, [form])
 
     const saveProfile = (value) => {
-        console.log("save-input---", value)
         if (value.birthday) {
             value.birthday = value.birthday.format("YYYY-MM-DD");
         }

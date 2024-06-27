@@ -1,7 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Flex, Pagination, Skeleton} from 'antd';
+import {Card, Flex, Pagination, Skeleton} from 'antd';
 import Post from "@/component/post";
-import {getQuestionAPI} from "@/apis/question";
+import {getPersonalQuestionsAPI} from "@/apis/question";
+import {useLocation} from "react-router-dom";
 
 
 
@@ -11,20 +12,22 @@ import {getQuestionAPI} from "@/apis/question";
 
 
 const History = () => {
-    //问题列表数据
+
     const [history, setHistory] = useState([]);
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
     const [total, setTotal] = useState(1);
     const [loading, setLoading] = useState(false);
 
+    const location = useLocation()
+    const username = location.state.username
+
     useEffect(() => {
-        getQuestionAPI(page, pageSize).then(
+        getPersonalQuestionsAPI(page, pageSize, username).then(
             response => {
-                console.log("response.data--", response.data);
-                setHistory(response.data);
+                setHistory(response.data.list);
+                setTotal(response.data.count)
                 setLoading(false)
-                setTotal(250)
             }
         ).catch(
             error => {
@@ -43,8 +46,10 @@ const History = () => {
         <>
             <div>
                 {history.map(item => (
-                    <Skeleton active loading={loading}>
-                        <Post key={item.id} closeButton={false} post={item}/>
+                    <Skeleton key={item.id} active loading={loading}>
+                        <Card style={{ marginBottom: '0.7rem' }} >
+                            <Post  closeButton={false} post={item}/>
+                        </Card>
                     </Skeleton>
                 ))}
                 <div style={{marginBottom: '50px'}}>

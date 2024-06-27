@@ -69,7 +69,6 @@ export function getProfileByNameAPI (name) {
 }
 
 export function updateProfile (data){
-    console.log("data---", data)
     return request({
         url: '/user/personal/profile',
         method: 'POST',

@@ -1,7 +1,7 @@
 import {Button, Card, Col, Divider, Flex, Image, Menu, message, Row, Tooltip, Typography, Upload} from "antd";
 import React, {useEffect, useState} from "react";
 import "./index.css"
-import {Outlet, useNavigate} from "react-router-dom";
+import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {
     HistoryOutlined, LikeOutlined, SafetyCertificateOutlined,
     SaveOutlined, StarOutlined,
@@ -11,6 +11,7 @@ import {
 import SiteInfo from "@/component/siteInfo/siteInfo";
 import {getProfileByTokenApi, uploadAvatar} from "@/apis/user";
 import ImgCrop from "antd-img-crop";
+import {default_avatar_png} from '@/data/data'
 
 
 const items = [
@@ -36,12 +37,14 @@ const items = [
     }
 ]
 
-const default_avatar_png = "https://lawyer-niweb1a.oss-us-west-1.aliyuncs.com/2.png"
+
 
 const {Text, Title} = Typography;
 
 const Personal = () => {
 
+
+    const location = useLocation();
 
     const [personalInfo, setPersonalInfo] = useState({});
 
@@ -63,8 +66,13 @@ const Personal = () => {
     }
 
     useEffect(() => {
-        updatePersonalInfo()
+        if (!location.state.userInfo ) {
+            updatePersonalInfo()
+        }else{
+            setPersonalInfo(location.state.userInfo)
+        }
     }, []);
+
     // todo
     const following_count = 100
     const likes = 1000
@@ -73,7 +81,7 @@ const Personal = () => {
     const navigate = useNavigate()
 
     const handleMenuClick = (e) => {
-        navigate(e.key)
+        navigate(e.key, {state: {username: personalInfo.username}})
     }
 
     const followList = (e) => {
@@ -93,7 +101,7 @@ const Personal = () => {
     };
 
     const handleUpload = async ({ file }) => {
-        console.log("up---");
+
         const formData = new FormData();
         formData.append('file', file);
 
@@ -104,7 +112,7 @@ const Personal = () => {
                 message.success('Upload successful');
                 updatePersonalInfo()
             }else{
-               throw new Error('upload failed')
+               throw new Error('Upload failed')
             }
         } catch (error) {
             console.log(error)

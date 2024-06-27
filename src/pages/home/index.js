@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import Post from "@/component/post"
-import {Col, message, Row, Skeleton} from "antd";
+import {Button, Card, Col, Divider, message, Row, Skeleton, Tabs} from "antd";
 import Profile from "@/component/profile";
 import SiteInfo from "@/component/siteInfo/siteInfo";
 import RecList from "src/component/recommend";
@@ -15,17 +15,20 @@ const Home = () => {
     const [recData, setRecData] = useState([]);
     //page
     const [page, setPage] = useState(1);
-    const [loading, setLoading] = useState(false);
+    const [hasMore, setHasMore] = useState(true);
 
+    const [loading, setLoading] = useState(false);
+    const [activeTab, setActiveTab] = useState('newest');
 
 
     useEffect(() => {
-
             setLoading(true);
-            getQuestionAPI(page, 10).then(
+            getQuestionAPI(page, 20, activeTab).then(
                 response => {
-                    console.log("response--", response);
-                    setQuestion((prev) => [...prev, ...response.data]);
+                    setQuestion((prev) => [...prev, ...response.data.list]);
+                    if (response.data.list.length < 10 || questions.length + response.data.list.length >= response.data.count) {
+                        setHasMore(false);
+                    }
                     setLoading(false);
                 },
             ).catch(
@@ -34,22 +37,18 @@ const Home = () => {
                     message.error("sorry, internal error")
                 }
             )
-    }, [page]);
-
-
+    }, [page, activeTab]);
 
     useEffect(()=>{
         setRecData(getRecDataAPI());
     },[])
-
-
 
     const observer = useRef();
     const loadMoreRef = useRef();
 
     useEffect(() => {
         observer.current = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting && !loading) {
+            if (entries[0].isIntersecting && hasMore && !loading) {
                 setPage((prev) => prev + 1);
             }
         });
@@ -69,6 +68,36 @@ const Home = () => {
     //用户信息
     const userInfo = useSelector(state => state.user.userInfo)
 
+    const renderPosts = () => (
+
+        <div>
+            {questions.map(post => (
+                <div key={post.id}>
+                    <Post closeButton={true} post={post}/>
+                    <Divider/>
+                </div>
+            ))}
+            <div ref={loadMoreRef} style={{ height: '20px', visibility: 'hidden' }}></div>
+            <Skeleton active loading={loading}/>
+            {!hasMore && <div>nothing~~~</div>}
+        </div>
+    );
+
+    const tabsItems = [
+        {
+            key: 'newest',
+            label: 'Newest',
+            children: renderPosts(),
+        },
+        {
+            key: 'recommend',
+            label: 'Recommend',
+            children: renderPosts(),
+        },
+    ];
+
+
+
 
     return (
         <div className={"flexCenter"}>
@@ -80,13 +109,9 @@ const Home = () => {
                         </div>
                     </Col>
                     <Col lg={12} xs={24}>
-                        <div>
-                            {questions.map(q => (
-                                <Post key={q.id} closeButton={true} post={q}/>
-                            ))}
-                            <div ref={loadMoreRef}></div>
-                            <Skeleton active loading={loading}/>
-                        </div>
+                        <Card>
+                            <Tabs activeKey={activeTab} items={tabsItems} onChange={(key) => setActiveTab(key)} />
+                        </Card>
                     </Col>
                     <Col lg={6} xs={0}>
                         <div style={{position: "sticky"}}>

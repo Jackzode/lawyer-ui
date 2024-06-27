@@ -16,7 +16,6 @@ const PostList = () => {
 
         getQuestionAPI().then(
             response => {
-                console.log("response--", response);
                 setData((prev) => [...prev, ...response.data]);
             },
         ).catch(

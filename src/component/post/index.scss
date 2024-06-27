@@ -1,0 +1,33 @@
+
+.ant-card {
+    .ant-card-body {
+        padding: 10px;
+        border-radius: 0 0 8px 8px;
+    }
+}
+
+/*.post-truncate-text {*/
+/*    display: -webkit-box;*/
+/*    -webkit-box-orient: vertical;*/
+/*    -webkit-line-clamp: 5;*/
+/*    overflow: hidden;*/
+/*    text-overflow: ellipsis;*/
+/*    white-space: normal;*/
+/*}*/
+
+.post-content {
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.post-button {
+    button {
+        font-weight: bolder;
+        width: 100%;
+        color: #5B6060;
+        font-size: 0.9rem;
+    }
+}
+

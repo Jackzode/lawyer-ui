@@ -1,6 +1,6 @@
 
 
-
+export const default_avatar_png = "https://lawyer-niweb1a.oss-us-west-1.aliyuncs.com/2.png"
 
 
 export const CITYLIST = [

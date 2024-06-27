@@ -46,7 +46,7 @@ const Profile = () => {
                                     src={userInfo.avatar}
                                     alt={""}/>}
                                 size={80}
-                                shape="circle"
+                                shape="square"
                             />
                         </div>
                         <h2>{userInfo.username}</h2>
