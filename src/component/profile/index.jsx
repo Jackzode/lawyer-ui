@@ -1,10 +1,10 @@
-import {Avatar, Button, Card, Flex} from "antd";
+import {Avatar, Button, Card, Flex, Row} from "antd";
 import {
     StarOutlined,
     UserOutlined,
 } from "@ant-design/icons";
 import "./index.css"
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import SideBar from "@/component/siderbar";
 import {useDispatch, useSelector} from "react-redux";
 import {getProfileByTokenApi} from "@/apis/user";
@@ -42,19 +42,25 @@ const Profile = () => {
                     <Flex vertical={true} align={'center'}>
                         <div>
                             <Avatar
-                                src={<img
-                                    src={userInfo.avatar}
-                                    alt={""}/>}
+                                src={userInfo.avatar}
                                 size={80}
                                 shape="square"
+                                alt={"please login"}
                             />
                         </div>
                         <h2>{userInfo.username}</h2>
-                        <div>{userInfo.bio}</div>
+                        <div className={'ellipsis-text'} style={{maxWidth: '10rem'}}>{userInfo.description}</div>
                     </Flex>
-                    <div><UserOutlined/> Follow &nbsp; {userInfo.follow_count}</div>
-                    {/*todo {userInfo.likes}*/}
-                    <div><StarOutlined/> Likes &nbsp; 1000</div>
+                    <div style={{width: '100%', color: "#8f9595", marginTop: '1rem'}}>
+                        <Row justify={'space-between'} >
+                            <div><UserOutlined/> Follow </div>
+                            <div>{userInfo.follow_count}</div>
+                        </Row>
+                        <Row justify={'space-between'} >
+                            <div><StarOutlined/> Likes </div>
+                            <div>{userInfo.follow_count}</div>
+                        </Row>
+                    </div>
                     <div style={{marginTop: 16}}>
                         <Button type="primary" block onClick={clickProfile}>My Profile</Button>
                     </div>
@@ -63,7 +69,6 @@ const Profile = () => {
             <Card hoverable={true} style={{marginTop: 16}}>
                 <SideBar/>
             </Card>
-
         </>
     )
 }

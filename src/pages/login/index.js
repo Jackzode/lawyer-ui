@@ -9,12 +9,12 @@ import RegisterForm from "@/component/registerForm";
 const {Title} = Typography
 const items = [
     {
-        label: (<h3>login</h3>),
+        label: (<h3>Login</h3>),
         key: '1',
         children: <LoginForm/>
     },
     {
-        label: (<h3>register</h3>),
+        label: (<h3>Register</h3>),
         key: '2',
         children: <RegisterForm/>
     },

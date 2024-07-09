@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Card, Button, Avatar, Flex, Typography, Divider, Row, Col} from 'antd';
 import {
     LikeOutlined,
     CommentOutlined,
     SendOutlined,
-    SaveOutlined, CloseOutlined
+    CloseOutlined, LikeFilled, StarOutlined, StarFilled
 } from '@ant-design/icons';
 import "./index.scss"
 import Comments from "@/component/comment";
@@ -12,7 +12,7 @@ import parse from 'html-react-parser';
 import DOMPurify from 'dompurify';
 import {default_avatar_png} from '@/data/data'
 import TimeDisplay from "@/component/timeDisplay";
-
+import {addQuestionLikes, checkLikedApi, checkSavedApi, getQuestionLikesCount, savePostItem} from "@/apis/question";
 
 
 const {Meta} = Card;
@@ -22,7 +22,30 @@ const {Paragraph, Text} = Typography;
 const Post = ({hasSave, closeButton, post}) => {
     const [visible, setVisible] = useState(true);
     const [showComments, setShowComments] = useState(false);
-    const [isExpanded, setIsExpanded] = useState(false);
+    // const [isExpanded, setIsExpanded] = useState(false);
+    const [like, setLike] = useState(false);
+    const [save, setSave] = useState(false);
+    const [likeCount, setLikeCount] = useState(0);
+
+    useEffect(() => {
+        const data = {
+            question_id: post.id,
+            author_id: post.authorID,
+        }
+        getQuestionLikesCount(data).then(
+            (response) => {
+                if (response.code === 0) {
+                    setLikeCount(response.data.count);
+                }
+            }
+        ).catch(
+            (error) => {
+                console.log(error)
+            }
+        )
+    }, []);
+
+
     const handleClose = () => {
         setVisible(false);
     };
@@ -31,38 +54,106 @@ const Post = ({hasSave, closeButton, post}) => {
 
     const purePost = DOMPurify.sanitize(post.content)
 
+    useEffect(() => {
+        checkLiked();
+        checkSaved();
+    }, []);
 
     const toggleComments = () => {
         setShowComments(!showComments);
     };
 
 
-    const toggleExpansion = () => {
-        setIsExpanded(!isExpanded);
-    };
+    // const toggleExpansion = () => {
+    //     setIsExpanded(!isExpanded);
+    // };
     if (!visible) return null;
+
+    const handleSaveClick =  () => {
+        let bookmark = true;
+        if (save) {
+            bookmark = false
+        }
+        const data = {
+            object_id: post.id,
+            group_id: post.authorID,
+            bookmark: bookmark,
+        }
+        savePostItem(data).then(r => {
+
+        })
+        setSave(!save)
+    }
+
+    const handleLikeClick =  () => {
+        let status = true;
+        if (like) {
+            status = false
+        }
+        const data = {
+            question_id: post.id,
+            author_id: post.authorID,
+            status: status,
+        }
+        addQuestionLikes(data).then(r => {
+
+        })
+        setLike(!like)
+    }
+
+    const checkLiked =  () => {
+        checkLikedApi(post.id).then(
+            (response) => {
+                if (response.code === 0) {
+                    setLike(response.data.liked);
+                }
+            }
+        ).catch(
+            (err) =>{
+                console.log(err)
+            }
+        )
+    }
+
+    const checkSaved = async () => {
+        checkSavedApi(post.id).then(
+            (response) => {
+                if (response.code === 0) {
+                    const dataMap = new Map(Object.entries(response.data));
+                    setSave(dataMap.get(post.id));
+                }
+            }
+        ).catch(
+            (err) =>{
+                console.log(err)
+            }
+        )
+    }
+
+
 
     return (
         <div style={{width: "100%"}}>
-            <div
-                style={{marginBottom: 10}}
-            >
+            <div style={{marginTop: '5px'}}>
                 <Meta style={{marginBottom: '10px'}}
-                      avatar={<Avatar size={65} shape={"square"} className={'flexCenter'} src={post.authorInfo.avatar || default_avatar_png}/>}
+                      avatar={<Avatar size={65} shape={"square"} className={'flexCenter'}
+                                      src={post.authorInfo.avatar || default_avatar_png}/>}
                       title={
-                          <div >
+                          <div>
                               <Flex justify={'space-between'} align={'center'}>
                                   <div>
                                       {post.authorInfo.username || "undefine"}
-                                      <Button type="text" size="small" style={{color:"blue"}}>Follow</Button>
                                   </div>
-                                  {closeButton && <Button onClick={handleClose} icon={<CloseOutlined />} type={'text'} size="small"/>}
-                                  </Flex>
-                              <Flex>
-                                  <Text style={{color: "#8f9595", fontSize: "0.8rem"}}>{post.authorInfo.description||"no introduction"}</Text>
+                                  {closeButton && <Button onClick={handleClose} icon={<CloseOutlined/>} type={'text'}
+                                                          size="small"/>}
                               </Flex>
-                              <TimeDisplay timestamp={post.created_at}></TimeDisplay>
-
+                              <Flex>
+                                  <Text style={{
+                                      color: "#8f9595",
+                                      fontSize: "0.8rem"
+                                  }}>{post.authorInfo.description || "no introduction"}</Text>
+                              </Flex>
+                              <div><TimeDisplay timestamp={post.created_at}></TimeDisplay></div>
                           </div>
                       }
                 />
@@ -81,36 +172,38 @@ const Post = ({hasSave, closeButton, post}) => {
                     }
                 >
                     {parse(purePost)}
-                    {/*dangerouslySetInnerHTML={{__html: post.content}}*/}
-                    {/*<div className={'post-content '}>{parse(purePost)}</div>*/}
                 </Paragraph>
-
+                <Divider style={{margin: '0.2rem 5px'}}/>
 
                 <Row justify={'space-evenly'} align={'middle'} className={'post-button'}>
                     <Col span={6}>
-                        <Button size={'large'} type="text"
-                                icon={<LikeOutlined/>}>
-                            Like
+                        <Button size={'small'} type={"text"}
+                                onClick={handleLikeClick}
+                                icon={like ? <LikeFilled/> : <LikeOutlined/>}>
+                            {likeCount} {like ? <span>Liked</span> : <span>Like</span>}
                         </Button>
                     </Col>
                     <Col span={6}>
-                        <Button size={'large'} style={{width: '100%'}} type="text"
-                                icon={<SaveOutlined/>}>Save</Button>
+                        <Button size={'small'} type="text"
+                                onClick={handleSaveClick}
+                                icon={save ? <StarFilled/> : <StarOutlined/>}>
+                            {save ? <span>Saved</span> : <span>Save</span>}
+                        </Button>
                     </Col>
                     <Col span={6}>
-                        <Button size={'large'} style={{width: '100%'}} type="text"
+                        <Button size={'small'} type="text"
                                 icon={<CommentOutlined/>} onClick={toggleComments}>
                             Comment
                         </Button>
                     </Col>
                     <Col span={6}>
-                        <Button size={'large'} style={{width: '100%'}} type="text"
+                        <Button size={'small'} type="text"
                                 icon={<SendOutlined/>}>
                             Send
                         </Button>
                     </Col>
                 </Row>
-                {showComments && (<Comments/>)}
+                {showComments && (<Comments qid={post.id}/>)}
             </div>
 
         </div>
@@ -122,29 +215,3 @@ const Post = ({hasSave, closeButton, post}) => {
 
 export default Post;
 
-
-/*<Card className={'card'}>
-actions={[
-                    <Button icon={<LikeOutlined/>} type="text">{post.likes}</Button>,
-                    <Button icon={<CommentOutlined/>} type="text" onClick={toggleComments}/>,
-                    <Button icon={<SendOutlined/>} type="text">Send</Button>,
-                ]}
-                <Meta style={{marginBottom: '2px'}} title={home.title} description={home.description}/>
-                <div>
-                        {expanded ? home.content : home.content.substring(0, 100)}
-                        {home.content.length > 100 && !expanded && <span>...</span>}
-                        <span onClick={toggleExpand} style={{marginLeft: '5px', cursor: 'pointer'}}>
-                                {expanded ? <UpOutlined/> : <DownOutlined/>}
-                        </span>
-                </div>
-
-                <div style={{marginTop: '5px'}}>
-                    <div style={{display: 'flex', justifyContent: 'flex-start'}}>
-                        <Button style={{width: 'auto'}} icon={<LikeOutlined />} type="text">{home.views}</Button>
-                        <Button style={{width: 'auto'}} icon={<DislikeOutlined />} type="text">{home.views}</Button>
-                        <Button style={{width: 'auto'}} icon={<EyeOutlined/>} type="text">{home.views}</Button>
-                        <Button style={{width: 'auto'}} icon={<MessageOutlined/> } type="text">{home.answers}</Button>
-                    </div>
-
-                </div>
-        </Card>*/

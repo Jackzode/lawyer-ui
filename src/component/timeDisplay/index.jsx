@@ -19,9 +19,9 @@ const TimeDisplay = ({ timestamp }) => {
     }
 
     return (
-        <div style={{color: "#8f9595", fontSize: "0.8rem"}}>
+        <span style={{color: "#8f9595", fontSize: "0.8rem"}}>
             · {displayTime}
-        </div>
+        </span>
     );
 };
 

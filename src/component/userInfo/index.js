@@ -5,7 +5,7 @@ import {CITYLIST} from "@/data/data";
 import {useOutletContext} from 'react-router-dom';
 import {getProfileByTokenApi, updateProfile} from "@/apis/user";
 import moment from "moment";
-import {getCityIdByName, getLocationPath} from '@/utils/city'
+import { getLocationPath} from '@/utils/city'
 
 
 const UserInfo = () => {
@@ -42,7 +42,7 @@ const UserInfo = () => {
         // 获取城市ID
         if (value.location) {
             value.cityId = value.location[value.location.length - 1]
-            delete value.location; // 删除location字段，因为我们只需要城市ID
+            // delete value.location; // 删除location字段，因为我们只需要城市ID
         }
         console.log("save-input-after--", value)
         updateProfile(value).then(

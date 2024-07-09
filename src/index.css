@@ -65,6 +65,15 @@ a {
 }
 
 
+.ellipsis-text {
+    color: #8f9595;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 /*@media screen and (max-width: 768px) {*/
 /*    .grid3,*/
 /*    .grid {*/

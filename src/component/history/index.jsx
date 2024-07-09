@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Card, Flex, Pagination, Skeleton} from 'antd';
 import Post from "@/component/post";
 import {getPersonalQuestionsAPI} from "@/apis/question";
-import {useLocation} from "react-router-dom";
+
 
 
 
@@ -19,11 +19,14 @@ const History = () => {
     const [total, setTotal] = useState(1);
     const [loading, setLoading] = useState(false);
 
-    const location = useLocation()
-    const username = location.state.username
+    const onPageChange = (current, curPageSize) => {
+        setPage(current);
+        setPageSize(curPageSize);
+    };
+
 
     useEffect(() => {
-        getPersonalQuestionsAPI(page, pageSize, username).then(
+        getPersonalQuestionsAPI(page, pageSize).then(
             response => {
                 setHistory(response.data.list);
                 setTotal(response.data.count)
@@ -36,11 +39,7 @@ const History = () => {
         )
     }, [page, pageSize]);
 
-    const onPageChange = (current, pageSize) => {
-        console.log(current, pageSize);
-        setPage(page);
-        setPageSize(pageSize);
-    };
+
 
     return (
         <>

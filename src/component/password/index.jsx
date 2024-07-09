@@ -1,6 +1,5 @@
 import React from 'react';
-import {Button, Card, Flex, Form, Input} from 'antd';
-import SiteInfo from "@/component/siteInfo/siteInfo";
+import {Button, Card, Form, Input} from 'antd';
 
 
 const Password = () => {
@@ -75,7 +74,6 @@ const Password = () => {
                 </Form>
 
             </Card>
-            <SiteInfo/>
         </>
     );
 };

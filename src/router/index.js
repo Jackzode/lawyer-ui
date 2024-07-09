@@ -1,4 +1,4 @@
-import {createBrowserRouter, Router} from "react-router-dom"
+import { createBrowserRouter} from "react-router-dom"
 import Login from "src/pages/login"
 import Test from "@/pages/test"
 import React from 'react';
@@ -16,6 +16,8 @@ import History from "@/component/history";
 import Password from "@/component/password";
 import EmailVerifyPage from "@/pages/emailverify";
 import HelpPage from "@/pages/help";
+import NotFoundPage from "@/pages/notFount";
+import ProtectedRoute from "@/router/protect";
 
 const router = createBrowserRouter([
     {
@@ -25,70 +27,90 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <Layout />,
+        auth: false,
         children: [
             {
                 index: true,
-                element:  <Home />
+                element:  <Home />,
+                auth: false,
             },
             {
                 path: '/specialist',
-                element: <Specialist />
+                element: <Specialist />,
+                auth: false,
             },
             {
                 path: '/order',
-                element: <Order />
+                element: <Order />,
+                auth: false,
             },
             {
                 path : "/user",
-                element: <Personal />,
+                element: <ProtectedRoute><Personal /></ProtectedRoute>,
+                auth: false,
                 children: [
                     {
                         path: "/user/info",
-                        element: <UserInfo/>
+                        element: <UserInfo/>,
+                        auth: false,
                     },
                     {
                         index: true,
-                        element: <History/>
+                        element: <History/>,
+                        auth: false,
                     },
                     {
                         path: "/user/saved",
-                        element: <Saved/>
+                        element: <Saved/>,
+                        auth: false,
                     },
                     {
                         path: "/user/password",
-                        element: <Password/>
+                        element: <Password/>,
+                        auth: false,
                     }
                 ]
             },
             {
                 path : "create",
-                element: <Create />
+                element: <Create />,
+                auth: false,
             },
             {
                 path : "message",
-                element: <Message />
+                element: <Message />,
+                auth: false,
             },
             {
                 path : "notification",
-                element: <Notification />
+                element: <Notification />,
+                auth: false,
             }
         ]
     },
     {
         path: "/login",
-        element: <Login />,
+        element: <ProtectedRoute><Login /></ProtectedRoute>,
+        auth: false,
     },
     {
         path: "/email/verification",
         element: <EmailVerifyPage/>,
+        auth: false,
     },
     {
         path: "/help",
-        element: <HelpPage/>
+        element: <HelpPage/>,
+        auth: false,
+    },
+    {
+        path: "*", // 捕获所有未匹配的路径
+        element: <NotFoundPage />,
+        auth: false,
     }
 
-
 ])
+
 
 export default router
 

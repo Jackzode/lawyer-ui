@@ -7,10 +7,11 @@ import {
     WarningOutlined
 } from "@ant-design/icons";
 import React from "react";
+import {useNavigate} from "react-router-dom";
 
 const items = [
     {
-        key: "/saved",
+        key: "/user/saved",
         label: (
             <Flex justify="space-between">
                 <span>
@@ -74,8 +75,12 @@ const items = [
 
 const SideBar = (props) => {
 
+    const navigate =  useNavigate()
+
+
     const handleMenuClick = (e) => {
-        console.log(e.key);
+        // console.log(e.key);
+        navigate(e.key)
     }
 
     return (

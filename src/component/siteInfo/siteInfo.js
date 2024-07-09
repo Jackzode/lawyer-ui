@@ -44,8 +44,8 @@ const SiteInfo = () => {
                      Corporation © 2024
                 </Text>
             </Flex>
-            <Divider/>
-            <Flex justify={'space-evenly'}>
+            {/*<Divider/>*/}
+            <Flex justify={'space-evenly'} style={{marginTop: '10px'}}>
                 <GoogleOutlined className='icon'/>
                 <FacebookOutlined className='icon'/>
                 <TwitterOutlined className='icon'/>

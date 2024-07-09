@@ -1,7 +1,7 @@
 import {Button, Card, Col, Divider, Flex, Image, Menu, message, Row, Tooltip, Typography, Upload} from "antd";
 import React, {useEffect, useState} from "react";
 import "./index.css"
-import {Outlet, useLocation, useNavigate} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import {
     HistoryOutlined, LikeOutlined, SafetyCertificateOutlined,
     SaveOutlined, StarOutlined,
@@ -44,8 +44,6 @@ const {Text, Title} = Typography;
 const Personal = () => {
 
 
-    const location = useLocation();
-
     const [personalInfo, setPersonalInfo] = useState({});
 
     const updatePersonalInfo = () => {
@@ -66,11 +64,7 @@ const Personal = () => {
     }
 
     useEffect(() => {
-        if (!location.state.userInfo ) {
-            updatePersonalInfo()
-        }else{
-            setPersonalInfo(location.state.userInfo)
-        }
+        updatePersonalInfo()
     }, []);
 
     // todo

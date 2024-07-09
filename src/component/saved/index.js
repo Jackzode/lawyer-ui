@@ -1,7 +1,8 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Flex, Pagination, Skeleton} from 'antd';
+import React, {useEffect, useState} from 'react';
+import {Card, Flex, Pagination, Skeleton} from 'antd';
 import Post from "@/component/post";
-import {getSaves} from "@/apis/save";
+import {getPersonalCollection} from "@/apis/question";
+
 
 
 
@@ -14,19 +15,29 @@ const Saved = () => {
     //问题列表数据
     const [saves, setSaves] = useState([]);
     const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(1);
-    const [total, setTotal] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+    const [totalCount, setTotalCount] = useState(1);
     const [loading, setLoading] = useState(false);
 
+
+
     useEffect(() => {
-        setSaves(getSaves(page, pageSize));
-        setLoading(false)
-        setTotal(250)
+        getPersonalCollection(page, pageSize).then(
+            response => {
+                setSaves(response.data.list);
+                setTotalCount(response.data.count)
+                setLoading(false)
+            }
+        ).catch(
+            error => {
+                console.log(error);
+            }
+        )
     }, [page, pageSize]);
 
     const onPageChange = (current, pageSize) => {
         console.log(current, pageSize);
-        setPage(page);
+        setPage(current);
         setPageSize(pageSize);
     };
 
@@ -34,15 +45,20 @@ const Saved = () => {
         <>
             <div>
                 {saves.map(item => (
-                    <Skeleton active loading={loading}>
-                        <Post key={item.id} closeButton={false} post={item}/>
+                    <Skeleton key={item.id} active loading={loading}>
+                        <Card style={{marginBottom: '0.7rem'}}>
+                            <Post  closeButton={false} post={item}/>
+                        </Card>
                     </Skeleton>
                 ))}
                 <div style={{marginBottom: '50px'}}>
                     <Flex justify={'center'}>
                         <Pagination
+                            showTotal={(totalCount) => `Total ${totalCount} items`}
+                            responsive={true}
+                            hideOnSinglePage={true}
                             onChange={onPageChange}
-                            total={total}
+                            total={totalCount}
                         />
                     </Flex>
                 </div>

@@ -4,7 +4,7 @@ import { localStorageGetToken } from "./token"
 
 
 const request = axios.create({
-    baseURL: 'http://192.168.1.119:8081/painting',
+    baseURL: 'http://localhost:8081/painting',
     timeout: 5000
 })
 

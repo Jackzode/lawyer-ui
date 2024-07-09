@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React from "react"
 import LOGO from "@/assets/logo/blue-logo.png"
 import "./header.css"
 import AvatarApp from "@/component/avatar"
@@ -43,7 +43,7 @@ const Header = () => {
                             onSearch={onSearch}
                         />
                     </div>
-                    <Button type={'primary'} href={'/create'} shape={'round'}>Create</Button>
+
                     {isLogin ? <AvatarApp /> : <Button shape={'round'} href={'/login'} >Login </Button>}
                 </Flex>
             </div>

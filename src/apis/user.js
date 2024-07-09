@@ -20,10 +20,13 @@ export function register(data){
     })
 }
 
-export function getCaptcha() {
+export function getCaptchaApi(email) {
     return request({
-        url: "/user/captcha",
+        url: "/user/getCaptchaCode",
         method: "get",
+        params: {
+            email: email
+        }
     })
 }
 
